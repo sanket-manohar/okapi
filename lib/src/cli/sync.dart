@@ -128,8 +128,7 @@ String syncPlist(String xml, Set<OkapiPermission> used) {
 
   final block = StringBuffer()..writeln('$indent$xmlBegin $_note -->');
   for (final k in keys) {
-    final value =
-        inside[k] ??
+    final value = inside[k] ??
         escape(
           'TODO: Tell users why this app needs this. '
           'Example: ${iosExamples[k] ?? 'Scan QR codes to pay in one tap.'}',
@@ -190,8 +189,7 @@ PodfileResult syncPodfile(String podfile, Set<String> exclude) {
   ).firstMatch(outside);
   final v = hook?.group(1) ?? 'installer';
   final flags = sorted.map((f) => 'OKAPI_EXCLUDE_$f').join(' ');
-  final block =
-      '''
+  final block = '''
   $podBegin $_note
   $v.pods_project.targets.each do |target|
     next unless target.name == 'okapi'
@@ -230,9 +228,9 @@ PodfileResult syncPodfile(String podfile, Set<String> exclude) {
 
 /// iOS families that no used permission needs.
 Set<String> unusedFamilies(Set<OkapiPermission> used, Set<String> keep) => {
-  for (final e in iosFamilies.entries)
-    if (!e.value.any(used.contains) && !keep.contains(e.key)) e.key,
-};
+      for (final e in iosFamilies.entries)
+        if (!e.value.any(used.contains) && !keep.contains(e.key)) e.key,
+    };
 
 const String _help = '''
 Okapi Sync writes the permission declarations your code needs.
@@ -308,9 +306,8 @@ Future<int> runSync(List<String> arguments) async {
       return;
     }
     changed++;
-    final region = after.contains(label)
-        ? managedRegionPreview(after, label)
-        : '';
+    final region =
+        after.contains(label) ? managedRegionPreview(after, label) : '';
     console.line(
       '  ${console.icon(Severity.info)} ${dry ? 'Would update' : 'Updated'} $rel',
     );
@@ -382,12 +379,12 @@ Future<int> runSync(List<String> arguments) async {
     changed == 0
         ? console.green('Everything is in sync.')
         : dry
-        ? console.yellow(
-            '$changed file${changed == 1 ? '' : 's'} would change. Run without --dry-run to apply.',
-          )
-        : console.green(
-            '$changed file${changed == 1 ? '' : 's'} updated. Next: dart run okapi:doctor',
-          ),
+            ? console.yellow(
+                '$changed file${changed == 1 ? '' : 's'} would change. Run without --dry-run to apply.',
+              )
+            : console.green(
+                '$changed file${changed == 1 ? '' : 's'} updated. Next: dart run okapi:doctor',
+              ),
   );
   console.line();
   return 0;

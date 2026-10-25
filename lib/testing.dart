@@ -30,13 +30,13 @@ class FakeOkapiPlatform extends OkapiPlatform {
     Set<OkapiOemScreen> oemScreens = const {},
     this.autoReset = OkapiAutoResetStatus.notAvailable,
     this.onAutoResetSettingsReturn,
-  }) : store = Map.of(store),
-       oemScreens = Set.of(oemScreens),
-       statuses = Map.of(statuses),
-       requestResults = Map.of(requestResults),
-       services = Map.of(services),
-       undeclared = Set.of(undeclared),
-       rationale = Map.of(rationale);
+  })  : store = Map.of(store),
+        oemScreens = Set.of(oemScreens),
+        statuses = Map.of(statuses),
+        requestResults = Map.of(requestResults),
+        services = Map.of(services),
+        undeclared = Set.of(undeclared),
+        rationale = Map.of(rationale);
 
   /// Current statuses (mutable).
   final Map<OkapiPermission, OkapiStatus> statuses;
@@ -168,12 +168,13 @@ OkapiDeviceInfo fakeAndroidDevice({
   OkapiOemBrand brand = OkapiOemBrand.xiaomi,
   int sdkInt = 34,
   String appName = 'Test App',
-}) => OkapiDeviceInfo(
-  platform: 'android',
-  manufacturer: brand.displayName,
-  brand: brand.displayName,
-  model: 'Test',
-  osVersion: '14',
-  sdkInt: sdkInt,
-  appName: appName,
-);
+}) =>
+    OkapiDeviceInfo(
+      platform: 'android',
+      manufacturer: brand.displayName,
+      brand: brand.displayName,
+      model: 'Test',
+      osVersion: '14',
+      sdkInt: sdkInt,
+      appName: appName,
+    );

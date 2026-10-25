@@ -40,18 +40,18 @@ class Finding {
 
   /// For JSON output.
   Map<String, Object?> toJson() => {
-    'severity': severity.name,
-    'area': area,
-    'message': message,
-    if (fix != null) 'fix': fix,
-  };
+        'severity': severity.name,
+        'area': area,
+        'message': message,
+        if (fix != null) 'fix': fix,
+      };
 }
 
 /// Small terminal helpers.
 class Console {
   /// Creates a console; colours only when the terminal supports them.
   Console({bool? color})
-    : color = color ?? (stdout.hasTerminal && stdout.supportsAnsiEscapes);
+      : color = color ?? (stdout.hasTerminal && stdout.supportsAnsiEscapes);
 
   /// Whether to print ANSI colours.
   final bool color;
@@ -78,11 +78,11 @@ class Console {
 
   /// Icon for a severity.
   String icon(Severity s) => switch (s) {
-    Severity.error => red('✗'),
-    Severity.warning => yellow('!'),
-    Severity.info => cyan('i'),
-    Severity.ok => green('✓'),
-  };
+        Severity.error => red('✗'),
+        Severity.warning => yellow('!'),
+        Severity.info => cyan('i'),
+        Severity.ok => green('✓'),
+      };
 
   /// Prints a line.
   void line([String s = '']) => stdout.writeln(s);

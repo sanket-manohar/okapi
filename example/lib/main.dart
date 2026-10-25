@@ -59,9 +59,8 @@ class _OkapiExampleAppState extends State<OkapiExampleApp> {
       home: HomePage(
         dark: _mode == ThemeMode.dark,
         onToggleTheme: () => setState(
-          () => _mode = _mode == ThemeMode.dark
-              ? ThemeMode.light
-              : ThemeMode.dark,
+          () => _mode =
+              _mode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark,
         ),
       ),
     );
@@ -303,9 +302,9 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 28, bottom: 10),
-    child: Text(text, style: Theme.of(context).textTheme.titleMedium),
-  );
+        padding: const EdgeInsets.only(top: 28, bottom: 10),
+        child: Text(text, style: Theme.of(context).textTheme.titleMedium),
+      );
 }
 
 /// Example of a completely custom prompt using the controller.

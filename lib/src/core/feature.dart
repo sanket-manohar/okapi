@@ -55,9 +55,9 @@ class OkapiFeature {
 
   /// Every permission, required first, without duplicates.
   List<OkapiPermission> get permissions => [
-    ...required,
-    ...optional.where((p) => !required.contains(p)),
-  ];
+        ...required,
+        ...optional.where((p) => !required.contains(p)),
+      ];
 
   /// Whether [p] is optional for this feature.
   bool isOptional(OkapiPermission p) =>

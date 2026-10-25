@@ -316,9 +316,7 @@ class _FeatureCard extends StatelessWidget {
                       children: [
                         Text(
                           feature.name,
-                          style: t
-                              .resolvedBody(context)
-                              .copyWith(
+                          style: t.resolvedBody(context).copyWith(
                                 color: t.onSurface,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16,
@@ -472,9 +470,7 @@ class _PermissionRow extends StatelessWidget {
                       children: [
                         Text(
                           s.nameOf(permission),
-                          style: t
-                              .resolvedBody(context)
-                              .copyWith(
+                          style: t.resolvedBody(context).copyWith(
                                 color: t.onSurface,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -543,9 +539,7 @@ class _InfoCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: t
-                        .resolvedBody(context)
-                        .copyWith(
+                    style: t.resolvedBody(context).copyWith(
                           color: t.onSurface,
                           fontWeight: FontWeight.w700,
                         ),

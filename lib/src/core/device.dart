@@ -61,44 +61,45 @@ enum OkapiOemBrand {
   /// Brands known to stop apps in the background unless the user allows it
   /// (autostart, battery saver, "sleeping apps").
   bool get restrictsBackground => switch (this) {
-    xiaomi ||
-    samsung ||
-    oppo ||
-    realme ||
-    oneplus ||
-    vivo ||
-    iqoo ||
-    huawei ||
-    honor ||
-    asus ||
-    tecno ||
-    infinix ||
-    itel ||
-    nokia => true,
-    _ => false,
-  };
+        xiaomi ||
+        samsung ||
+        oppo ||
+        realme ||
+        oneplus ||
+        vivo ||
+        iqoo ||
+        huawei ||
+        honor ||
+        asus ||
+        tecno ||
+        infinix ||
+        itel ||
+        nokia =>
+          true,
+        _ => false,
+      };
 
   /// Name shown to users.
   String get displayName => switch (this) {
-    xiaomi => 'Xiaomi',
-    samsung => 'Samsung',
-    oppo => 'OPPO',
-    realme => 'realme',
-    oneplus => 'OnePlus',
-    vivo => 'vivo',
-    iqoo => 'iQOO',
-    huawei => 'Huawei',
-    honor => 'Honor',
-    motorola => 'Motorola',
-    nokia => 'Nokia',
-    asus => 'ASUS',
-    tecno => 'TECNO',
-    infinix => 'Infinix',
-    itel => 'itel',
-    google => 'Google',
-    apple => 'Apple',
-    other => 'Android',
-  };
+        xiaomi => 'Xiaomi',
+        samsung => 'Samsung',
+        oppo => 'OPPO',
+        realme => 'realme',
+        oneplus => 'OnePlus',
+        vivo => 'vivo',
+        iqoo => 'iQOO',
+        huawei => 'Huawei',
+        honor => 'Honor',
+        motorola => 'Motorola',
+        nokia => 'Nokia',
+        asus => 'ASUS',
+        tecno => 'TECNO',
+        infinix => 'Infinix',
+        itel => 'itel',
+        google => 'Google',
+        apple => 'Apple',
+        other => 'Android',
+      };
 }
 
 /// Hidden system screens Okapi can open on some phones.
@@ -128,11 +129,11 @@ enum OkapiAutoResetStatus {
 
   /// Decodes the integer sent by the native side.
   static OkapiAutoResetStatus fromCode(int? code) => switch (code) {
-    0 => notAvailable,
-    1 => exempt,
-    2 => enabled,
-    _ => unknown,
-  };
+        0 => notAvailable,
+        1 => exempt,
+        2 => enabled,
+        _ => unknown,
+      };
 }
 
 /// Basic facts about the phone, read from the system. Contains nothing that
@@ -151,26 +152,26 @@ class OkapiDeviceInfo {
 
   /// Placeholder used before the native side answers, and on web/desktop.
   const OkapiDeviceInfo.unknown()
-    : platform = 'other',
-      manufacturer = '',
-      brand = '',
-      model = '',
-      osVersion = '',
-      sdkInt = 0,
-      appName = 'this app';
+      : platform = 'other',
+        manufacturer = '',
+        brand = '',
+        model = '',
+        osVersion = '',
+        sdkInt = 0,
+        appName = 'this app';
 
   /// Builds info from the map sent by the native side.
   factory OkapiDeviceInfo.fromMap(Map<Object?, Object?> m) => OkapiDeviceInfo(
-    platform: (m['platform'] as String?) ?? 'other',
-    manufacturer: (m['manufacturer'] as String?) ?? '',
-    brand: (m['brand'] as String?) ?? '',
-    model: (m['model'] as String?) ?? '',
-    osVersion: (m['osVersion'] as String?) ?? '',
-    sdkInt: (m['sdkInt'] as int?) ?? 0,
-    appName: ((m['appName'] as String?)?.trim().isNotEmpty ?? false)
-        ? (m['appName'] as String).trim()
-        : 'this app',
-  );
+        platform: (m['platform'] as String?) ?? 'other',
+        manufacturer: (m['manufacturer'] as String?) ?? '',
+        brand: (m['brand'] as String?) ?? '',
+        model: (m['model'] as String?) ?? '',
+        osVersion: (m['osVersion'] as String?) ?? '',
+        sdkInt: (m['sdkInt'] as int?) ?? 0,
+        appName: ((m['appName'] as String?)?.trim().isNotEmpty ?? false)
+            ? (m['appName'] as String).trim()
+            : 'this app',
+      );
 
   /// `android`, `ios` or `other`.
   final String platform;
@@ -228,14 +229,14 @@ class OkapiDeviceInfo {
   /// A copy with the maker replaced; used by the debug panel to preview the
   /// guide for other brands.
   OkapiDeviceInfo withBrand(OkapiOemBrand b) => OkapiDeviceInfo(
-    platform: 'android',
-    manufacturer: b.displayName,
-    brand: b.displayName,
-    model: model,
-    osVersion: osVersion,
-    sdkInt: sdkInt == 0 ? 34 : sdkInt,
-    appName: appName,
-  );
+        platform: 'android',
+        manufacturer: b.displayName,
+        brand: b.displayName,
+        model: model,
+        osVersion: osVersion,
+        sdkInt: sdkInt == 0 ? 34 : sdkInt,
+        appName: appName,
+      );
 
   @override
   String toString() =>

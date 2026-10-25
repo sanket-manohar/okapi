@@ -126,23 +126,23 @@ class OkapiFeatureGate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => OkapiFeatureBuilder(
-    feature: feature,
-    builder: (context, result, ask) {
-      if (result == null) {
-        return loading ??
-            const Center(
-              child: SizedBox.square(
-                dimension: 28,
-                child: CircularProgressIndicator(strokeWidth: 2.5),
-              ),
-            );
-      }
-      if (result.isFull) return child;
-      if (result.isAvailable && !requireFull) return partialChild ?? child;
-      return lockedBuilder?.call(context, result, ask) ??
-          OkapiFeatureLockedCard(result: result, onAllow: ask);
-    },
-  );
+        feature: feature,
+        builder: (context, result, ask) {
+          if (result == null) {
+            return loading ??
+                const Center(
+                  child: SizedBox.square(
+                    dimension: 28,
+                    child: CircularProgressIndicator(strokeWidth: 2.5),
+                  ),
+                );
+          }
+          if (result.isFull) return child;
+          if (result.isAvailable && !requireFull) return partialChild ?? child;
+          return lockedBuilder?.call(context, result, ask) ??
+              OkapiFeatureLockedCard(result: result, onAllow: ask);
+        },
+      );
 }
 
 /// The default locked card for [OkapiFeatureGate].
@@ -241,20 +241,20 @@ class OkapiFeatureLevelChip extends StatelessWidget {
     final s = Okapi.strings;
     final (label, color, icon) = switch (level) {
       OkapiFeatureLevel.full => (
-        s.levelFull,
-        t.granted,
-        Icons.check_circle_rounded,
-      ),
+          s.levelFull,
+          t.granted,
+          Icons.check_circle_rounded,
+        ),
       OkapiFeatureLevel.partial => (
-        s.levelPartial,
-        t.warning,
-        Icons.adjust_rounded,
-      ),
+          s.levelPartial,
+          t.warning,
+          Icons.adjust_rounded,
+        ),
       OkapiFeatureLevel.unavailable => (
-        s.levelOff,
-        t.muted,
-        Icons.radio_button_unchecked_rounded,
-      ),
+          s.levelOff,
+          t.muted,
+          Icons.radio_button_unchecked_rounded,
+        ),
     };
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),

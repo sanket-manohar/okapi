@@ -53,8 +53,7 @@ List<Finding> diagnose(
   Usage? usage,
 }) {
   final out = <Finding>[];
-  final cfg =
-      config ??
+  final cfg = config ??
       (project.pubspec.existsSync()
           ? CliConfig.parse(project.pubspec.readAsStringSync())
           : const CliConfig());
@@ -97,7 +96,8 @@ List<Finding> diagnose(
         'Code',
         'Permissions chosen at runtime (${use.dynamicLocations.take(3).join(', ')}). '
             'Doctor and Sync can\'t see which ones.',
-        fix: 'List them in pubspec.yaml:\nokapi:\n  permissions: [contacts, calendarFullAccess]',
+        fix:
+            'List them in pubspec.yaml:\nokapi:\n  permissions: [contacts, calendarFullAccess]',
       ),
     );
   }
@@ -165,8 +165,7 @@ List<Finding> diagnose(
           Severity.warning,
           'Google Play',
           '$n falls under Google Play\'s ${playRestricted[n]}.',
-          fix:
-              'Complete the declaration in Play Console › App content, '
+          fix: 'Complete the declaration in Play Console › App content, '
               'or remove the permission if your app doesn\'t qualify.',
         ),
       );
@@ -398,16 +397,15 @@ Future<int> runDoctor(List<String> arguments) async {
       }
     }
     console.line();
-    final summary =
-        '$errors error${errors == 1 ? '' : 's'}, '
+    final summary = '$errors error${errors == 1 ? '' : 's'}, '
         '$warnings warning${warnings == 1 ? '' : 's'}, '
         '$notes note${notes == 1 ? '' : 's'}';
     console.line(
       errors > 0
           ? console.red(summary)
           : warnings > 0
-          ? console.yellow(summary)
-          : console.green(summary),
+              ? console.yellow(summary)
+              : console.green(summary),
     );
     if (errors + warnings > 0) {
       console.line(

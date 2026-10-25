@@ -89,7 +89,6 @@ class OkapiStore {
       Map.unmodifiable(await _load());
 
   /// Forgets the in-memory copy.
-  @visibleForTesting
   static void resetCache() {
     _owner = null;
     _cache = null;

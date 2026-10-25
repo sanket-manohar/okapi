@@ -72,14 +72,15 @@ class OkapiAskPolicy {
     Duration? cooldownAfterDenied,
     Duration? cooldownAfterSettingsDecline,
     int? maxPromptsPerSession,
-  }) => OkapiAskPolicy(
-    skipFirstLaunches: skipFirstLaunches ?? this.skipFirstLaunches,
-    cooldownAfterNotNow: cooldownAfterNotNow ?? this.cooldownAfterNotNow,
-    cooldownAfterDenied: cooldownAfterDenied ?? this.cooldownAfterDenied,
-    cooldownAfterSettingsDecline:
-        cooldownAfterSettingsDecline ?? this.cooldownAfterSettingsDecline,
-    maxPromptsPerSession: maxPromptsPerSession ?? this.maxPromptsPerSession,
-  );
+  }) =>
+      OkapiAskPolicy(
+        skipFirstLaunches: skipFirstLaunches ?? this.skipFirstLaunches,
+        cooldownAfterNotNow: cooldownAfterNotNow ?? this.cooldownAfterNotNow,
+        cooldownAfterDenied: cooldownAfterDenied ?? this.cooldownAfterDenied,
+        cooldownAfterSettingsDecline:
+            cooldownAfterSettingsDecline ?? this.cooldownAfterSettingsDecline,
+        maxPromptsPerSession: maxPromptsPerSession ?? this.maxPromptsPerSession,
+      );
 }
 
 /// Why a policy postponed a prompt.
@@ -105,13 +106,13 @@ enum OkapiPolicyReason {
 class OkapiPolicyDecision {
   /// Creates a decision.
   const OkapiPolicyDecision.allow()
-    : allowed = true,
-      reason = null,
-      retryAfter = null;
+      : allowed = true,
+        reason = null,
+        retryAfter = null;
 
   /// Creates a "not now" decision.
   const OkapiPolicyDecision.wait(this.reason, [this.retryAfter])
-    : allowed = false;
+      : allowed = false;
 
   /// Whether Okapi may show its UI now.
   final bool allowed;
@@ -149,14 +150,20 @@ class OkapiPolicyEngine {
   static const String _prefix = 'okapi.policy.';
 
   static int _sessionPrompts = 0;
-  static Future<int>? _launches;
+  static int? _launchCount;
 
   /// Counts this app launch once per process. Called by `Okapi.configure`.
-  static Future<int> recordLaunch() => _launches ??= () async {
+  static Future<int> recordLaunch() async {
+    final known = _launchCount;
+    if (known != null) return known;
     final n = (await OkapiStore.getInt(_launchKey) ?? 0) + 1;
+    // Another call may have finished while this one was reading.
+    final counted = _launchCount;
+    if (counted != null) return counted;
+    _launchCount = n;
     await OkapiStore.set(_launchKey, '$n');
     return n;
-  }();
+  }
 
   /// Number of app launches, including this one.
   static Future<int> launches() => recordLaunch();
@@ -234,14 +241,13 @@ class OkapiPolicyEngine {
     await OkapiStore.clear(_prefix);
     if (launchesToo) {
       await OkapiStore.set(_launchKey, null);
-      _launches = null;
+      _launchCount = null;
     }
   }
 
   /// Resets in-memory state between tests.
-  @visibleForTesting
   static void debugResetSession() {
     _sessionPrompts = 0;
-    _launches = null;
+    _launchCount = null;
   }
 }

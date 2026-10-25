@@ -269,9 +269,9 @@ class _OkapiDebugPanelState extends State<OkapiDebugPanel> {
                         },
                         child: const Text('Clear Okapi storage'),
                       ),
-                      OutlinedButton(
+                      const OutlinedButton(
                         onPressed: Okapi.openAppSettings,
-                        child: const Text('Open app settings'),
+                        child: Text('Open app settings'),
                       ),
                     ],
                   ),
@@ -294,33 +294,34 @@ class _OkapiDebugPanelState extends State<OkapiDebugPanel> {
   }
 
   Widget _label(TextTheme textTheme, String text) => Padding(
-    padding: const EdgeInsets.only(top: 14, bottom: 6),
-    child: Text(
-      text.toUpperCase(),
-      style: textTheme.labelSmall?.copyWith(
-        letterSpacing: 1.1,
-        fontWeight: FontWeight.w700,
-      ),
-    ),
-  );
+        padding: const EdgeInsets.only(top: 14, bottom: 6),
+        child: Text(
+          text.toUpperCase(),
+          style: textTheme.labelSmall?.copyWith(
+            letterSpacing: 1.1,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      );
 
   Widget _chips<T>({
     required T value,
     required Map<T, String> options,
     required ValueChanged<T> onSelected,
-  }) => Wrap(
-    spacing: 6,
-    runSpacing: 6,
-    children: [
-      for (final e in options.entries)
-        ChoiceChip(
-          label: Text(e.value),
-          selected: e.key == value,
-          visualDensity: VisualDensity.compact,
-          onSelected: (_) => onSelected(e.key),
-        ),
-    ],
-  );
+  }) =>
+      Wrap(
+        spacing: 6,
+        runSpacing: 6,
+        children: [
+          for (final e in options.entries)
+            ChoiceChip(
+              label: Text(e.value),
+              selected: e.key == value,
+              visualDensity: VisualDensity.compact,
+              onSelected: (_) => onSelected(e.key),
+            ),
+        ],
+      );
 
   Widget _permissionRow(OkapiPermission p) {
     final real = Okapi.lastKnown(p);
@@ -381,38 +382,39 @@ class _Fab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Material(
-    color: const Color(0xFF5A2A1E),
-    shape: const CircleBorder(),
-    elevation: 6,
-    child: SizedBox(
-      width: 48,
-      height: 48,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          const Icon(Icons.bug_report_rounded, color: Color(0xFFF2C9A0)),
-          if (count > 0)
-            Positioned(
-              right: 2,
-              top: 2,
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF2BD9A0),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  '$count',
-                  style: const TextStyle(
-                    color: Color(0xFF0E3B2C),
-                    fontSize: 11,
-                    fontWeight: FontWeight.w700,
+        color: const Color(0xFF5A2A1E),
+        shape: const CircleBorder(),
+        elevation: 6,
+        child: SizedBox(
+          width: 48,
+          height: 48,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              const Icon(Icons.bug_report_rounded, color: Color(0xFFF2C9A0)),
+              if (count > 0)
+                Positioned(
+                  right: 2,
+                  top: 2,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFF2BD9A0),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Text(
+                      '$count',
+                      style: const TextStyle(
+                        color: Color(0xFF0E3B2C),
+                        fontSize: 11,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-        ],
-      ),
-    ),
-  );
+            ],
+          ),
+        ),
+      );
 }

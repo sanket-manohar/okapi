@@ -14,12 +14,9 @@ import '../core/status.dart';
 /// You normally never touch this. Replace [instance] with a fake in tests
 /// (see `package:okapi/testing.dart`).
 abstract class OkapiPlatform {
-  /// The active implementation.
-  static OkapiPlatform get instance => _instance;
-  static OkapiPlatform _instance = MethodChannelOkapi();
-
-  /// Swap the implementation, for tests or custom platforms.
-  static set instance(OkapiPlatform value) => _instance = value;
+  /// The active implementation. Replace it with a fake in tests or with a
+  /// custom platform.
+  static OkapiPlatform instance = MethodChannelOkapi();
 
   /// Current status without showing any UI.
   Future<OkapiStatus> checkStatus(OkapiPermission permission);
@@ -97,8 +94,8 @@ class MethodChannelOkapi extends OkapiPlatform {
         permission: permissionName == null
             ? null
             : OkapiPermission.values
-                  .where((p) => p.name == permissionName)
-                  .firstOrNull,
+                .where((p) => p.name == permissionName)
+                .firstOrNull,
       );
     }
   }

@@ -221,13 +221,14 @@ enum OkapiPermission {
   /// Whether this permission has a related system service that can be
   /// switched off globally (Location Services, Bluetooth).
   bool get hasService => switch (this) {
-    location ||
-    locationWhenInUse ||
-    locationAlways ||
-    bluetooth ||
-    bluetoothScan ||
-    bluetoothConnect ||
-    bluetoothAdvertise => true,
-    _ => false,
-  };
+        location ||
+        locationWhenInUse ||
+        locationAlways ||
+        bluetooth ||
+        bluetoothScan ||
+        bluetoothConnect ||
+        bluetoothAdvertise =>
+          true,
+        _ => false,
+      };
 }

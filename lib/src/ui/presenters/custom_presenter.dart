@@ -142,8 +142,8 @@ class OkapiCustomPresenter extends OkapiPresenter {
           OkapiPresentationStyle.sheet => OkapiSheetFrame(child: child),
           OkapiPresentationStyle.dialog => OkapiDialogFrame(child: child),
           OkapiPresentationStyle.fullScreen => OkapiFullScreenFrame(
-            child: child,
-          ),
+              child: child,
+            ),
         };
       },
     );

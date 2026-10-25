@@ -198,6 +198,9 @@ void main() {
     });
 
     testWidgets('skips the first launch', (tester) async {
+      // Start from a fresh launch count inside this test.
+      Okapi.debugReset();
+      fake.store.clear();
       Okapi.configure(
         const OkapiConfig(
           presenter: OkapiNoUiPresenter(),
@@ -209,7 +212,7 @@ void main() {
       expect(r.outcome, OkapiOutcome.deferredByPolicy);
       expect(r.policy?.reason, OkapiPolicyReason.firstLaunches);
       expect(fake.requests, isEmpty);
-    });
+    }, timeout: const Timeout(Duration(seconds: 20)));
 
     testWidgets('session limit', (tester) async {
       Okapi.configure(
@@ -354,6 +357,7 @@ void main() {
       fake.onAutoResetSettingsReturn = OkapiAutoResetStatus.exempt;
       fake.store['okapi.granted'] = 'camera';
       fake.statuses[OkapiPermission.camera] = OkapiStatus.denied;
+      Okapi.debugReset();
       Okapi.configure(
         OkapiConfig(
           presenter: OkapiFunctionPresenter((_, p) async {

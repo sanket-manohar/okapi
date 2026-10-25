@@ -21,9 +21,9 @@ class OkapiIconBadge extends StatelessWidget {
     this.theme,
     this.color,
   }) : assert(
-         permission != null || icon != null,
-         'Pass a permission or an icon.',
-       );
+          permission != null || icon != null,
+          'Pass a permission or an icon.',
+        );
 
   /// Which permission's icon to show.
   final OkapiPermission? permission;
@@ -112,8 +112,7 @@ class OkapiPromptView extends StatelessWidget {
     final t = theme ?? OkapiThemeData.of(context);
     final isSettings = prompt.kind == OkapiPromptKind.settings;
     final usesIcon = prompt.icon != null || !prompt.hasPermission;
-    final isMulti =
-        !usesIcon &&
+    final isMulti = !usesIcon &&
         (prompt.kind == OkapiPromptKind.multiRationale ||
             (isSettings && prompt.permissions.length > 1));
     final badgeColor = switch (prompt.kind) {
@@ -121,7 +120,8 @@ class OkapiPromptView extends StatelessWidget {
       OkapiPromptKind.restricted ||
       OkapiPromptKind.serviceDisabled ||
       OkapiPromptKind.autoReset ||
-      OkapiPromptKind.backgroundReliability => t.warning,
+      OkapiPromptKind.backgroundReliability =>
+        t.warning,
       _ => null,
     };
     final align = isMulti ? TextAlign.start : TextAlign.center;
@@ -141,9 +141,8 @@ class OkapiPromptView extends StatelessWidget {
       Text(
         prompt.title,
         textAlign: align,
-        style: t
-            .resolvedTitle(context)
-            .copyWith(fontSize: expanded ? 28 : null),
+        style:
+            t.resolvedTitle(context).copyWith(fontSize: expanded ? 28 : null),
       ),
       const SizedBox(height: 10),
       Text(prompt.message, textAlign: align, style: t.resolvedBody(context)),
@@ -202,19 +201,19 @@ class _PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FilledButton(
-    onPressed: onTap,
-    style: FilledButton.styleFrom(
-      backgroundColor: theme.primary,
-      foregroundColor: theme.onPrimary,
-      minimumSize: const Size.fromHeight(54),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(theme.buttonRadius),
-      ),
-      textStyle: theme.resolvedButton(context),
-      elevation: 0,
-    ),
-    child: Text(label),
-  );
+        onPressed: onTap,
+        style: FilledButton.styleFrom(
+          backgroundColor: theme.primary,
+          foregroundColor: theme.onPrimary,
+          minimumSize: const Size.fromHeight(54),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(theme.buttonRadius),
+          ),
+          textStyle: theme.resolvedButton(context),
+          elevation: 0,
+        ),
+        child: Text(label),
+      );
 }
 
 class _ReasonRow extends StatelessWidget {
@@ -232,55 +231,55 @@ class _ReasonRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.symmetric(vertical: 8),
-    child: Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          width: 42,
-          height: 42,
-          decoration: BoxDecoration(
-            color: theme.iconBackground,
-            borderRadius: BorderRadius.circular(13),
-          ),
-          child: Icon(
-            okapiIconFor(permission),
-            size: 22,
-            color: theme.iconColor,
-          ),
-        ),
-        const SizedBox(width: 14),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Wrap(
-                spacing: 8,
-                crossAxisAlignment: WrapCrossAlignment.center,
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 42,
+              height: 42,
+              decoration: BoxDecoration(
+                color: theme.iconBackground,
+                borderRadius: BorderRadius.circular(13),
+              ),
+              child: Icon(
+                okapiIconFor(permission),
+                size: 22,
+                color: theme.iconColor,
+              ),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    Okapi.nameOf(permission),
-                    style: theme
-                        .resolvedBody(context)
-                        .copyWith(
-                          color: theme.onSurface,
-                          fontWeight: FontWeight.w600,
-                        ),
+                  Wrap(
+                    spacing: 8,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      Text(
+                        Okapi.nameOf(permission),
+                        style: theme.resolvedBody(context).copyWith(
+                              color: theme.onSurface,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                      if (optional)
+                        OkapiTag(label: Okapi.strings.optionalLabel),
+                    ],
                   ),
-                  if (optional) OkapiTag(label: Okapi.strings.optionalLabel),
+                  if (reason != null)
+                    Text(
+                      reason!,
+                      style:
+                          theme.resolvedBody(context).copyWith(fontSize: 13.5),
+                    ),
                 ],
               ),
-              if (reason != null)
-                Text(
-                  reason!,
-                  style: theme.resolvedBody(context).copyWith(fontSize: 13.5),
-                ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ],
-    ),
-  );
+      );
 }
 
 class _SettingsSteps extends StatelessWidget {
@@ -297,9 +296,7 @@ class _SettingsSteps extends StatelessWidget {
       strings.stepPermissions,
       strings.nameOf(permission),
     ];
-    final style = theme
-        .resolvedBody(context)
-        .copyWith(
+    final style = theme.resolvedBody(context).copyWith(
           fontSize: 13,
           color: theme.onSurface,
           fontWeight: FontWeight.w600,

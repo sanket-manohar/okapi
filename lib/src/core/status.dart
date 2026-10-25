@@ -68,26 +68,26 @@ enum OkapiStatus {
 
   /// Decodes the integer sent by the native side.
   static OkapiStatus fromCode(int? code) => switch (code) {
-    0 => denied,
-    1 => granted,
-    2 => restricted,
-    3 => limited,
-    4 => permanentlyDenied,
-    5 => provisional,
-    6 => notApplicable,
-    _ => denied,
-  };
+        0 => denied,
+        1 => granted,
+        2 => restricted,
+        3 => limited,
+        4 => permanentlyDenied,
+        5 => provisional,
+        6 => notApplicable,
+        _ => denied,
+      };
 
   /// The integer used on the native side.
   int get code => switch (this) {
-    denied => 0,
-    granted => 1,
-    restricted => 2,
-    limited => 3,
-    permanentlyDenied => 4,
-    provisional => 5,
-    notApplicable => 6,
-  };
+        denied => 0,
+        granted => 1,
+        restricted => 2,
+        limited => 3,
+        permanentlyDenied => 4,
+        provisional => 5,
+        notApplicable => 6,
+      };
 }
 
 /// Whether the system service behind a permission is switched on.
@@ -103,10 +103,10 @@ enum OkapiServiceStatus {
 
   /// Decodes the integer sent by the native side.
   static OkapiServiceStatus fromCode(int? code) => switch (code) {
-    0 => disabled,
-    1 => enabled,
-    _ => notApplicable,
-  };
+        0 => disabled,
+        1 => enabled,
+        _ => notApplicable,
+      };
 }
 
 /// A change detected for one permission, for example after the user flipped
@@ -198,8 +198,7 @@ class OkapiResult {
   bool get isGranted => outcome == OkapiOutcome.granted;
 
   @override
-  String toString() =>
-      'OkapiResult(${permission.name}, ${status.name}, '
+  String toString() => 'OkapiResult(${permission.name}, ${status.name}, '
       '${outcome.name}, attempts: $attempts)';
 }
 

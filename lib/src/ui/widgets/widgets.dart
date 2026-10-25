@@ -135,34 +135,34 @@ class _OkapiPermissionGateState extends State<OkapiPermissionGate> {
 
   @override
   Widget build(BuildContext context) => OkapiPermissionBuilder(
-    permission: widget.permission,
-    reason: widget.reason,
-    builder: (context, status, ask) {
-      if (status == null) {
-        return widget.loading ??
-            const Center(
-              child: SizedBox.square(
-                dimension: 28,
-                child: CircularProgressIndicator(strokeWidth: 2.5),
-              ),
-            );
-      }
-      if (status.canProceed) return widget.child;
-      if (widget.autoAsk && !_autoAsked && status.isDenied) {
-        _autoAsked = true;
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (mounted) ask();
-        });
-      }
-      return widget.lockedBuilder?.call(context, status, ask) ??
-          OkapiLockedCard(
-            permission: widget.permission,
-            status: status,
-            reason: widget.reason,
-            onAllow: ask,
-          );
-    },
-  );
+        permission: widget.permission,
+        reason: widget.reason,
+        builder: (context, status, ask) {
+          if (status == null) {
+            return widget.loading ??
+                const Center(
+                  child: SizedBox.square(
+                    dimension: 28,
+                    child: CircularProgressIndicator(strokeWidth: 2.5),
+                  ),
+                );
+          }
+          if (status.canProceed) return widget.child;
+          if (widget.autoAsk && !_autoAsked && status.isDenied) {
+            _autoAsked = true;
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (mounted) ask();
+            });
+          }
+          return widget.lockedBuilder?.call(context, status, ask) ??
+              OkapiLockedCard(
+                permission: widget.permission,
+                status: status,
+                reason: widget.reason,
+                onAllow: ask,
+              );
+        },
+      );
 }
 
 /// The default "allow access" card used by [OkapiPermissionGate].
@@ -207,8 +207,8 @@ class OkapiLockedCard extends StatelessWidget {
                 color: blocked
                     ? t.danger
                     : restricted
-                    ? t.warning
-                    : null,
+                        ? t.warning
+                        : null,
               ),
               const SizedBox(height: 20),
               Text(
@@ -353,9 +353,7 @@ class OkapiPermissionTile extends StatelessWidget {
                   children: [
                     Text(
                       Okapi.nameOf(permission),
-                      style: t
-                          .resolvedBody(context)
-                          .copyWith(
+                      style: t.resolvedBody(context).copyWith(
                             color: t.onSurface,
                             fontWeight: FontWeight.w600,
                           ),
