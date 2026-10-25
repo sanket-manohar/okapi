@@ -14,6 +14,9 @@ import '../core/status.dart';
 /// You normally never touch this. Replace [instance] with a fake in tests
 /// (see `package:okapi/testing.dart`).
 abstract class OkapiPlatform {
+  /// Constructor for subclasses.
+  OkapiPlatform();
+
   /// The active implementation. Replace it with a fake in tests or with a
   /// custom platform.
   static OkapiPlatform instance = MethodChannelOkapi();
