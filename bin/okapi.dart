@@ -16,9 +16,11 @@ Future<void> main(List<String> args) async {
     case 'sync':
       exitCode = await runSync(rest);
     default:
-      stdout.writeln('Okapi tools\n\n'
-          '  dart run okapi:doctor   Check your permission setup\n'
-          '  dart run okapi:sync     Write the declarations your code needs\n\n'
-          'Add --help to either command for options.');
+      stdout.writeln(
+        'Okapi tools\n\n'
+        '  dart run okapi:doctor   Check your permission setup\n'
+        '  dart run okapi:sync     Write the declarations your code needs\n\n'
+        'Add --help to either command for options.',
+      );
   }
 }

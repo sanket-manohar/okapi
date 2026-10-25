@@ -70,10 +70,15 @@ enum OkapiPermission {
   /// Google Play restricts this permission; only request it if your app
   /// qualifies under Play policy.
   manageExternalStorage(
-      OkapiPlatformSupport.androidOnly, OkapiRequestKind.specialSettingsScreen),
+    OkapiPlatformSupport.androidOnly,
+    OkapiRequestKind.specialSettingsScreen,
+  ),
 
   /// Location metadata inside photos (Android 10+ `ACCESS_MEDIA_LOCATION`).
-  mediaLocation(OkapiPlatformSupport.androidOnly, OkapiRequestKind.runtimeDialog),
+  mediaLocation(
+    OkapiPlatformSupport.androidOnly,
+    OkapiRequestKind.runtimeDialog,
+  ),
 
   /// Apple Music / media library (iOS `NSAppleMusicUsageDescription`).
   mediaLibrary(OkapiPlatformSupport.iosOnly, OkapiRequestKind.runtimeDialog),
@@ -103,7 +108,9 @@ enum OkapiPermission {
 
   /// Do Not Disturb access (Android `ACCESS_NOTIFICATION_POLICY`).
   accessNotificationPolicy(
-      OkapiPlatformSupport.androidOnly, OkapiRequestKind.specialSettingsScreen),
+    OkapiPlatformSupport.androidOnly,
+    OkapiRequestKind.specialSettingsScreen,
+  ),
 
   // ── Personal data ────────────────────────────────────────────────────────
   /// Contacts. Android `READ_CONTACTS`/`WRITE_CONTACTS`; iOS contacts
@@ -133,11 +140,17 @@ enum OkapiPermission {
   sensors(OkapiPlatformSupport.both, OkapiRequestKind.runtimeDialog),
 
   /// Body sensors in the background (Android 13+ `BODY_SENSORS_BACKGROUND`).
-  sensorsAlways(OkapiPlatformSupport.androidOnly, OkapiRequestKind.runtimeDialog),
+  sensorsAlways(
+    OkapiPlatformSupport.androidOnly,
+    OkapiRequestKind.runtimeDialog,
+  ),
 
   /// Physical activity. Android 10+ `ACTIVITY_RECOGNITION`;
   /// iOS motion & fitness.
-  activityRecognition(OkapiPlatformSupport.both, OkapiRequestKind.runtimeDialog),
+  activityRecognition(
+    OkapiPlatformSupport.both,
+    OkapiRequestKind.runtimeDialog,
+  ),
 
   // ── Bluetooth & nearby ───────────────────────────────────────────────────
   /// Bluetooth. Android 12+ scan + connect; iOS Bluetooth.
@@ -153,32 +166,45 @@ enum OkapiPermission {
   bluetoothAdvertise(OkapiPlatformSupport.both, OkapiRequestKind.runtimeDialog),
 
   /// Android 13+ `NEARBY_WIFI_DEVICES`.
-  nearbyWifiDevices(OkapiPlatformSupport.androidOnly, OkapiRequestKind.runtimeDialog),
+  nearbyWifiDevices(
+    OkapiPlatformSupport.androidOnly,
+    OkapiRequestKind.runtimeDialog,
+  ),
 
   // ── Privacy & tracking ───────────────────────────────────────────────────
   /// iOS 14+ App Tracking Transparency. Okapi automatically waits until the
   /// app is active before asking, which avoids the common "dialog never
   /// shows" bug.
   appTrackingTransparency(
-      OkapiPlatformSupport.iosOnly, OkapiRequestKind.runtimeDialog),
+    OkapiPlatformSupport.iosOnly,
+    OkapiRequestKind.runtimeDialog,
+  ),
 
   // ── Android special app access ───────────────────────────────────────────
   /// Ignore battery optimisations
   /// (`REQUEST_IGNORE_BATTERY_OPTIMIZATIONS`).
   ignoreBatteryOptimizations(
-      OkapiPlatformSupport.androidOnly, OkapiRequestKind.specialSettingsScreen),
+    OkapiPlatformSupport.androidOnly,
+    OkapiRequestKind.specialSettingsScreen,
+  ),
 
   /// Display over other apps (`SYSTEM_ALERT_WINDOW`).
   systemAlertWindow(
-      OkapiPlatformSupport.androidOnly, OkapiRequestKind.specialSettingsScreen),
+    OkapiPlatformSupport.androidOnly,
+    OkapiRequestKind.specialSettingsScreen,
+  ),
 
   /// Install unknown apps (`REQUEST_INSTALL_PACKAGES`).
   requestInstallPackages(
-      OkapiPlatformSupport.androidOnly, OkapiRequestKind.specialSettingsScreen),
+    OkapiPlatformSupport.androidOnly,
+    OkapiRequestKind.specialSettingsScreen,
+  ),
 
   /// Exact alarms (Android 12+ `SCHEDULE_EXACT_ALARM`).
   scheduleExactAlarm(
-      OkapiPlatformSupport.androidOnly, OkapiRequestKind.specialSettingsScreen),
+    OkapiPlatformSupport.androidOnly,
+    OkapiRequestKind.specialSettingsScreen,
+  ),
 
   // ── iOS read-only ────────────────────────────────────────────────────────
   /// iOS Background App Refresh. Read-only: apps cannot request it.
@@ -195,14 +221,13 @@ enum OkapiPermission {
   /// Whether this permission has a related system service that can be
   /// switched off globally (Location Services, Bluetooth).
   bool get hasService => switch (this) {
-        location ||
-        locationWhenInUse ||
-        locationAlways ||
-        bluetooth ||
-        bluetoothScan ||
-        bluetoothConnect ||
-        bluetoothAdvertise =>
-          true,
-        _ => false,
-      };
+    location ||
+    locationWhenInUse ||
+    locationAlways ||
+    bluetooth ||
+    bluetoothScan ||
+    bluetoothConnect ||
+    bluetoothAdvertise => true,
+    _ => false,
+  };
 }

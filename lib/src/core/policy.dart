@@ -72,15 +72,14 @@ class OkapiAskPolicy {
     Duration? cooldownAfterDenied,
     Duration? cooldownAfterSettingsDecline,
     int? maxPromptsPerSession,
-  }) =>
-      OkapiAskPolicy(
-        skipFirstLaunches: skipFirstLaunches ?? this.skipFirstLaunches,
-        cooldownAfterNotNow: cooldownAfterNotNow ?? this.cooldownAfterNotNow,
-        cooldownAfterDenied: cooldownAfterDenied ?? this.cooldownAfterDenied,
-        cooldownAfterSettingsDecline:
-            cooldownAfterSettingsDecline ?? this.cooldownAfterSettingsDecline,
-        maxPromptsPerSession: maxPromptsPerSession ?? this.maxPromptsPerSession,
-      );
+  }) => OkapiAskPolicy(
+    skipFirstLaunches: skipFirstLaunches ?? this.skipFirstLaunches,
+    cooldownAfterNotNow: cooldownAfterNotNow ?? this.cooldownAfterNotNow,
+    cooldownAfterDenied: cooldownAfterDenied ?? this.cooldownAfterDenied,
+    cooldownAfterSettingsDecline:
+        cooldownAfterSettingsDecline ?? this.cooldownAfterSettingsDecline,
+    maxPromptsPerSession: maxPromptsPerSession ?? this.maxPromptsPerSession,
+  );
 }
 
 /// Why a policy postponed a prompt.
@@ -106,13 +105,13 @@ enum OkapiPolicyReason {
 class OkapiPolicyDecision {
   /// Creates a decision.
   const OkapiPolicyDecision.allow()
-      : allowed = true,
-        reason = null,
-        retryAfter = null;
+    : allowed = true,
+      reason = null,
+      retryAfter = null;
 
   /// Creates a "not now" decision.
   const OkapiPolicyDecision.wait(this.reason, [this.retryAfter])
-      : allowed = false;
+    : allowed = false;
 
   /// Whether Okapi may show its UI now.
   final bool allowed;
@@ -154,10 +153,10 @@ class OkapiPolicyEngine {
 
   /// Counts this app launch once per process. Called by `Okapi.configure`.
   static Future<int> recordLaunch() => _launches ??= () async {
-        final n = (await OkapiStore.getInt(_launchKey) ?? 0) + 1;
-        await OkapiStore.set(_launchKey, '$n');
-        return n;
-      }();
+    final n = (await OkapiStore.getInt(_launchKey) ?? 0) + 1;
+    await OkapiStore.set(_launchKey, '$n');
+    return n;
+  }();
 
   /// Number of app launches, including this one.
   static Future<int> launches() => recordLaunch();
@@ -168,7 +167,8 @@ class OkapiPolicyEngine {
   /// Counts a flow that showed UI.
   static void countPrompt() => _sessionPrompts++;
 
-  static String _key(String flow, OkapiPolicyEvent e) => '$_prefix$flow.${e.name}';
+  static String _key(String flow, OkapiPolicyEvent e) =>
+      '$_prefix$flow.${e.name}';
 
   /// Remembers an event for [flow] (usually the permission name).
   static Future<void> record(String flow, OkapiPolicyEvent event) =>
@@ -192,7 +192,10 @@ class OkapiPolicyEngine {
     }
     final now = DateTime.now();
     Future<OkapiPolicyDecision?> cooldown(
-        OkapiPolicyEvent e, Duration d, OkapiPolicyReason r) async {
+      OkapiPolicyEvent e,
+      Duration d,
+      OkapiPolicyReason r,
+    ) async {
       if (d <= Duration.zero) return null;
       final last = await OkapiStore.getTime(_key(flow, e));
       if (last == null) return null;
@@ -202,15 +205,23 @@ class OkapiPolicyEngine {
 
     final checks = settings
         ? [
-            await cooldown(OkapiPolicyEvent.settingsDecline,
-                policy.cooldownAfterSettingsDecline,
-                OkapiPolicyReason.settingsCooldown),
+            await cooldown(
+              OkapiPolicyEvent.settingsDecline,
+              policy.cooldownAfterSettingsDecline,
+              OkapiPolicyReason.settingsCooldown,
+            ),
           ]
         : [
-            await cooldown(OkapiPolicyEvent.notNow, policy.cooldownAfterNotNow,
-                OkapiPolicyReason.notNowCooldown),
-            await cooldown(OkapiPolicyEvent.denied, policy.cooldownAfterDenied,
-                OkapiPolicyReason.deniedCooldown),
+            await cooldown(
+              OkapiPolicyEvent.notNow,
+              policy.cooldownAfterNotNow,
+              OkapiPolicyReason.notNowCooldown,
+            ),
+            await cooldown(
+              OkapiPolicyEvent.denied,
+              policy.cooldownAfterDenied,
+              OkapiPolicyReason.deniedCooldown,
+            ),
           ];
     return checks.whereType<OkapiPolicyDecision>().firstOrNull ??
         const OkapiPolicyDecision.allow();

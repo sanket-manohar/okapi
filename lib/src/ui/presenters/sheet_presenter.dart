@@ -112,7 +112,7 @@ class OkapiFunctionPresenter extends OkapiPresenter {
 
   /// Called for every prompt. Return `true` for the primary action.
   final Future<bool> Function(BuildContext context, OkapiPrompt prompt)
-      onPresent;
+  onPresent;
 
   @override
   Future<bool> present(BuildContext context, OkapiPrompt prompt) =>

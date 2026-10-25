@@ -141,7 +141,10 @@ class _OkapiDebugPanelState extends State<OkapiDebugPanel> {
       borderRadius: BorderRadius.circular(22),
       clipBehavior: Clip.antiAlias,
       child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: 520, maxHeight: size.height * 0.78),
+        constraints: BoxConstraints(
+          maxWidth: 520,
+          maxHeight: size.height * 0.78,
+        ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -151,7 +154,10 @@ class _OkapiDebugPanelState extends State<OkapiDebugPanel> {
               padding: const EdgeInsets.fromLTRB(16, 12, 8, 12),
               child: Row(
                 children: [
-                  const Icon(Icons.bug_report_rounded, color: Color(0xFFF2C9A0)),
+                  const Icon(
+                    Icons.bug_report_rounded,
+                    color: Color(0xFFF2C9A0),
+                  ),
                   const SizedBox(width: 10),
                   const Expanded(
                     child: Text(
@@ -167,7 +173,8 @@ class _OkapiDebugPanelState extends State<OkapiDebugPanel> {
                     TextButton(
                       onPressed: _o.clear,
                       style: TextButton.styleFrom(
-                          foregroundColor: const Color(0xFFF2C9A0)),
+                        foregroundColor: const Color(0xFFF2C9A0),
+                      ),
                       child: Text('Reset ${_o.count}'),
                     ),
                   InkWell(
@@ -175,7 +182,10 @@ class _OkapiDebugPanelState extends State<OkapiDebugPanel> {
                     onTap: () => setState(() => _open = false),
                     child: const Padding(
                       padding: EdgeInsets.all(8),
-                      child: Icon(Icons.close_rounded, color: Color(0xFFFFF8EF)),
+                      child: Icon(
+                        Icons.close_rounded,
+                        color: Color(0xFFFFF8EF),
+                      ),
                     ),
                   ),
                 ],
@@ -192,7 +202,8 @@ class _OkapiDebugPanelState extends State<OkapiDebugPanel> {
                     dense: true,
                     title: const Text('System dialog: user taps Allow'),
                     subtitle: const Text(
-                        'Simulated permissions become granted when requested.'),
+                      'Simulated permissions become granted when requested.',
+                    ),
                     value: _o.allowOnRequest,
                     onChanged: (v) => _o.allowOnRequest = v,
                   ),
@@ -229,9 +240,7 @@ class _OkapiDebugPanelState extends State<OkapiDebugPanel> {
                   const SizedBox(height: 8),
                   Row(
                     children: [
-                      Expanded(
-                        child: _label(textTheme, 'Permissions'),
-                      ),
+                      Expanded(child: _label(textTheme, 'Permissions')),
                       FilterChip(
                         label: const Text('Show all'),
                         selected: _showAll,
@@ -285,34 +294,33 @@ class _OkapiDebugPanelState extends State<OkapiDebugPanel> {
   }
 
   Widget _label(TextTheme textTheme, String text) => Padding(
-        padding: const EdgeInsets.only(top: 14, bottom: 6),
-        child: Text(
-          text.toUpperCase(),
-          style: textTheme.labelSmall?.copyWith(
-            letterSpacing: 1.1,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      );
+    padding: const EdgeInsets.only(top: 14, bottom: 6),
+    child: Text(
+      text.toUpperCase(),
+      style: textTheme.labelSmall?.copyWith(
+        letterSpacing: 1.1,
+        fontWeight: FontWeight.w700,
+      ),
+    ),
+  );
 
   Widget _chips<T>({
     required T value,
     required Map<T, String> options,
     required ValueChanged<T> onSelected,
-  }) =>
-      Wrap(
-        spacing: 6,
-        runSpacing: 6,
-        children: [
-          for (final e in options.entries)
-            ChoiceChip(
-              label: Text(e.value),
-              selected: e.key == value,
-              visualDensity: VisualDensity.compact,
-              onSelected: (_) => onSelected(e.key),
-            ),
-        ],
-      );
+  }) => Wrap(
+    spacing: 6,
+    runSpacing: 6,
+    children: [
+      for (final e in options.entries)
+        ChoiceChip(
+          label: Text(e.value),
+          selected: e.key == value,
+          visualDensity: VisualDensity.compact,
+          onSelected: (_) => onSelected(e.key),
+        ),
+    ],
+  );
 
   Widget _permissionRow(OkapiPermission p) {
     final real = Okapi.lastKnown(p);
@@ -352,9 +360,11 @@ class _OkapiDebugPanelState extends State<OkapiDebugPanel> {
             SwitchListTile(
               contentPadding: EdgeInsets.zero,
               dense: true,
-              title: Text(p.name.startsWith('bluetooth')
-                  ? 'Simulate Bluetooth off'
-                  : 'Simulate Location Services off'),
+              title: Text(
+                p.name.startsWith('bluetooth')
+                    ? 'Simulate Bluetooth off'
+                    : 'Simulate Location Services off',
+              ),
               value: _o.serviceOf(p) == OkapiServiceStatus.disabled,
               onChanged: (v) =>
                   _o.setService(p, v ? OkapiServiceStatus.disabled : null),
@@ -371,38 +381,38 @@ class _Fab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Material(
-        color: const Color(0xFF5A2A1E),
-        shape: const CircleBorder(),
-        elevation: 6,
-        child: SizedBox(
-          width: 48,
-          height: 48,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              const Icon(Icons.bug_report_rounded, color: Color(0xFFF2C9A0)),
-              if (count > 0)
-                Positioned(
-                  right: 2,
-                  top: 2,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF2BD9A0),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text(
-                      '$count',
-                      style: const TextStyle(
-                        color: Color(0xFF0E3B2C),
-                        fontSize: 11,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
+    color: const Color(0xFF5A2A1E),
+    shape: const CircleBorder(),
+    elevation: 6,
+    child: SizedBox(
+      width: 48,
+      height: 48,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          const Icon(Icons.bug_report_rounded, color: Color(0xFFF2C9A0)),
+          if (count > 0)
+            Positioned(
+              right: 2,
+              top: 2,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 1),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF2BD9A0),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  '$count',
+                  style: const TextStyle(
+                    color: Color(0xFF0E3B2C),
+                    fontSize: 11,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
-            ],
-          ),
-        ),
-      );
+              ),
+            ),
+        ],
+      ),
+    ),
+  );
 }

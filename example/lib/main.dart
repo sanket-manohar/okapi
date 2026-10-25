@@ -19,11 +19,13 @@ const videoCall = OkapiFeature(
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  Okapi.configure(OkapiConfig(
-    debugLogs: true,
-    // Friendly limits, but allow asking on the very first launch in the demo.
-    askPolicy: OkapiAskPolicy.recommended.copyWith(skipFirstLaunches: 0),
-  ));
+  Okapi.configure(
+    OkapiConfig(
+      debugLogs: true,
+      // Friendly limits, but allow asking on the very first launch in the demo.
+      askPolicy: OkapiAskPolicy.recommended.copyWith(skipFirstLaunches: 0),
+    ),
+  );
   runApp(const OkapiExampleApp());
 }
 
@@ -56,8 +58,11 @@ class _OkapiExampleAppState extends State<OkapiExampleApp> {
       builder: (context, child) => OkapiDebugPanel(child: child!),
       home: HomePage(
         dark: _mode == ThemeMode.dark,
-        onToggleTheme: () => setState(() => _mode =
-            _mode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark),
+        onToggleTheme: () => setState(
+          () => _mode = _mode == ThemeMode.dark
+              ? ThemeMode.light
+              : ThemeMode.dark,
+        ),
       ),
     );
   }
@@ -134,13 +139,14 @@ class HomePage extends StatelessWidget {
           OutlinedButton.icon(
             icon: const Icon(Icons.video_call_rounded),
             label: const Text('Camera + microphone'),
-            onPressed: () => Okapi.askAll(context, const [
-              OkapiPermission.camera,
-              OkapiPermission.microphone,
-            ], reasons: const {
-              OkapiPermission.camera: 'See each other on video calls.',
-              OkapiPermission.microphone: 'Hear each other on calls.',
-            }),
+            onPressed: () => Okapi.askAll(
+              context,
+              const [OkapiPermission.camera, OkapiPermission.microphone],
+              reasons: const {
+                OkapiPermission.camera: 'See each other on video calls.',
+                OkapiPermission.microphone: 'Hear each other on calls.',
+              },
+            ),
           ),
           const _Header('3. Your own widget, Okapi\'s logic'),
           OutlinedButton.icon(
@@ -151,10 +157,8 @@ class HomePage extends StatelessWidget {
               OkapiPermission.contacts,
               presenter: OkapiCustomPresenter(
                 style: OkapiPresentationStyle.dialog,
-                builder: (context, prompt, c) => _MyCustomCard(
-                  prompt: prompt,
-                  controller: c,
-                ),
+                builder: (context, prompt, c) =>
+                    _MyCustomCard(prompt: prompt, controller: c),
               ),
             ),
           ),
@@ -171,8 +175,10 @@ class HomePage extends StatelessWidget {
                 permission: OkapiPermission.camera,
                 reason: 'Point your camera at a QR code.',
                 child: const Center(
-                  child: Text('📷  Camera is ready',
-                      style: TextStyle(fontSize: 18)),
+                  child: Text(
+                    '📷  Camera is ready',
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
               ),
             ),
@@ -206,13 +212,16 @@ class HomePage extends StatelessWidget {
             onPressed: () async {
               final r = await Okapi.askFeature(context, videoCall);
               if (!context.mounted) return;
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(switch (r.level) {
-                  OkapiFeatureLevel.full => 'Calling with everything on',
-                  OkapiFeatureLevel.partial => 'Calling without the headset',
-                  OkapiFeatureLevel.unavailable => 'Video calls need camera and mic',
-                }),
-              ));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(switch (r.level) {
+                    OkapiFeatureLevel.full => 'Calling with everything on',
+                    OkapiFeatureLevel.partial => 'Calling without the headset',
+                    OkapiFeatureLevel.unavailable =>
+                      'Video calls need camera and mic',
+                  }),
+                ),
+              );
             },
           ),
           const SizedBox(height: 8),
@@ -222,8 +231,9 @@ class HomePage extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               child: OkapiFeatureGate(
                 feature: videoCall,
-                partialChild:
-                    const Center(child: Text('🎥  Ready (no headset)')),
+                partialChild: const Center(
+                  child: Text('🎥  Ready (no headset)'),
+                ),
                 child: const Center(child: Text('🎥  Ready to call')),
               ),
             ),
@@ -233,13 +243,20 @@ class HomePage extends StatelessWidget {
             icon: const Icon(Icons.battery_saver_rounded),
             label: const Text('Keep reminders on time'),
             onPressed: () async {
-              final r =
-                  await Okapi.askBackgroundReliability(context, force: true);
+              final r = await Okapi.askBackgroundReliability(
+                context,
+                force: true,
+              );
               if (context.mounted) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(r.applicable
-                        ? '${r.brand.displayName}: ready = ${r.ready}'
-                        : 'Not needed on this phone')));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      r.applicable
+                          ? '${r.brand.displayName}: ready = ${r.ready}'
+                          : 'Not needed on this phone',
+                    ),
+                  ),
+                );
               }
             },
           ),
@@ -250,8 +267,9 @@ class HomePage extends StatelessWidget {
             onPressed: () async {
               final s = await Okapi.protectFromAutoReset(context, force: true);
               if (context.mounted) {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackBar(content: Text('Auto-reset: ${s.name}')));
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Auto-reset: ${s.name}')),
+                );
               }
             },
           ),
@@ -285,9 +303,9 @@ class _Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Padding(
-        padding: const EdgeInsets.only(top: 28, bottom: 10),
-        child: Text(text, style: Theme.of(context).textTheme.titleMedium),
-      );
+    padding: const EdgeInsets.only(top: 28, bottom: 10),
+    child: Text(text, style: Theme.of(context).textTheme.titleMedium),
+  );
 }
 
 /// Example of a completely custom prompt using the controller.
@@ -302,12 +320,17 @@ class _MyCustomCard extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(controller.iconOf(prompt.permission),
-            size: 56, color: Colors.deepPurple),
+        Icon(
+          controller.iconOf(prompt.permission),
+          size: 56,
+          color: Colors.deepPurple,
+        ),
         const SizedBox(height: 16),
-        Text(prompt.title,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headlineSmall),
+        Text(
+          prompt.title,
+          textAlign: TextAlign.center,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
         const SizedBox(height: 8),
         Text(prompt.message, textAlign: TextAlign.center),
         const SizedBox(height: 24),

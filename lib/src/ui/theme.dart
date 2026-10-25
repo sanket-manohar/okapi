@@ -11,7 +11,10 @@ import '../core/permission.dart';
 
 /// Builds the visual shown at the top of a prompt (icon, Lottie, image...).
 typedef OkapiVisualBuilder = Widget Function(
-    BuildContext context, OkapiPermission permission, OkapiThemeData theme);
+  BuildContext context,
+  OkapiPermission permission,
+  OkapiThemeData theme,
+);
 
 /// Colours, shapes and text styles for all of Okapi's built-in UI.
 ///
@@ -120,67 +123,68 @@ class OkapiThemeData extends ThemeExtension<OkapiThemeData> {
 
   /// Derives a theme that blends into any app.
   factory OkapiThemeData.fromColorScheme(ColorScheme cs) => OkapiThemeData(
-        primary: cs.primary,
-        onPrimary: cs.onPrimary,
-        surface: cs.surface,
-        onSurface: cs.onSurface,
-        muted: cs.onSurfaceVariant,
-        granted: const Color(0xFF1FAE7A),
-        danger: cs.error,
-        warning: const Color(0xFFE59A1A),
-        iconBackground: cs.primaryContainer,
-        iconColor: cs.onPrimaryContainer,
-      );
+    primary: cs.primary,
+    onPrimary: cs.onPrimary,
+    surface: cs.surface,
+    onSurface: cs.onSurface,
+    muted: cs.onSurfaceVariant,
+    granted: const Color(0xFF1FAE7A),
+    danger: cs.error,
+    warning: const Color(0xFFE59A1A),
+    iconBackground: cs.primaryContainer,
+    iconColor: cs.onPrimaryContainer,
+  );
 
   /// Okapi's signature look: warm chestnut and cream, light mode.
   factory OkapiThemeData.okapiLight() => const OkapiThemeData(
-        primary: Color(0xFF5A2A1E),
-        onPrimary: Color(0xFFFFF8EF),
-        surface: Color(0xFFFFFBF5),
-        onSurface: Color(0xFF1E1512),
-        muted: Color(0xFF7A6A60),
-        granted: Color(0xFF16A37A),
-        danger: Color(0xFFD9483B),
-        warning: Color(0xFFD98B1A),
-        iconBackground: Color(0xFFF3E4D3),
-        iconColor: Color(0xFF5A2A1E),
-      );
+    primary: Color(0xFF5A2A1E),
+    onPrimary: Color(0xFFFFF8EF),
+    surface: Color(0xFFFFFBF5),
+    onSurface: Color(0xFF1E1512),
+    muted: Color(0xFF7A6A60),
+    granted: Color(0xFF16A37A),
+    danger: Color(0xFFD9483B),
+    warning: Color(0xFFD98B1A),
+    iconBackground: Color(0xFFF3E4D3),
+    iconColor: Color(0xFF5A2A1E),
+  );
 
   /// Okapi's signature look, dark mode.
   factory OkapiThemeData.okapiDark() => const OkapiThemeData(
-        primary: Color(0xFFF2C9A0),
-        onPrimary: Color(0xFF2A140E),
-        surface: Color(0xFF1C1513),
-        onSurface: Color(0xFFF6EDE1),
-        muted: Color(0xFFB8A79B),
-        granted: Color(0xFF2BD9A0),
-        danger: Color(0xFFFF6B5A),
-        warning: Color(0xFFFFB547),
-        iconBackground: Color(0xFF3A2620),
-        iconColor: Color(0xFFF2C9A0),
-      );
+    primary: Color(0xFFF2C9A0),
+    onPrimary: Color(0xFF2A140E),
+    surface: Color(0xFF1C1513),
+    onSurface: Color(0xFFF6EDE1),
+    muted: Color(0xFFB8A79B),
+    granted: Color(0xFF2BD9A0),
+    danger: Color(0xFFFF6B5A),
+    warning: Color(0xFFFFB547),
+    iconBackground: Color(0xFF3A2620),
+    iconColor: Color(0xFFF2C9A0),
+  );
 
   /// Minimal black and white with sharp corners.
   factory OkapiThemeData.mono({bool dark = false}) => OkapiThemeData(
-        primary: dark ? Colors.white : Colors.black,
-        onPrimary: dark ? Colors.black : Colors.white,
-        surface: dark ? const Color(0xFF111111) : Colors.white,
-        onSurface: dark ? Colors.white : Colors.black,
-        muted: dark ? const Color(0xFF9E9E9E) : const Color(0xFF616161),
-        granted: const Color(0xFF00A86B),
-        danger: const Color(0xFFE53935),
-        warning: const Color(0xFFF9A825),
-        iconBackground: dark ? const Color(0xFF222222) : const Color(0xFFF1F1F1),
-        iconColor: dark ? Colors.white : Colors.black,
-        radius: 12,
-        buttonRadius: 10,
-        useGradientBadge: false,
-      );
+    primary: dark ? Colors.white : Colors.black,
+    onPrimary: dark ? Colors.black : Colors.white,
+    surface: dark ? const Color(0xFF111111) : Colors.white,
+    onSurface: dark ? Colors.white : Colors.black,
+    muted: dark ? const Color(0xFF9E9E9E) : const Color(0xFF616161),
+    granted: const Color(0xFF00A86B),
+    danger: const Color(0xFFE53935),
+    warning: const Color(0xFFF9A825),
+    iconBackground: dark ? const Color(0xFF222222) : const Color(0xFFF1F1F1),
+    iconColor: dark ? Colors.white : Colors.black,
+    radius: 12,
+    buttonRadius: 10,
+    useGradientBadge: false,
+  );
 
   /// Resolves the theme for [context] (see class docs for the order).
   static OkapiThemeData of(BuildContext context) {
-    final inherited =
-        context.dependOnInheritedWidgetOfExactType<OkapiTheme>()?.data;
+    final inherited = context
+        .dependOnInheritedWidgetOfExactType<OkapiTheme>()
+        ?.data;
     if (inherited != null) return inherited;
     final configured = Okapi.config.theme;
     if (configured != null) return configured;
@@ -190,16 +194,15 @@ class OkapiThemeData extends ThemeExtension<OkapiThemeData> {
   }
 
   /// Resolved title style.
-  TextStyle resolvedTitle(BuildContext context) => (Theme.of(context)
-              .textTheme
-              .titleLarge ??
-          const TextStyle(fontSize: 22))
-      .copyWith(
-          color: onSurface,
-          fontWeight: FontWeight.w700,
-          height: 1.2,
-          letterSpacing: -0.3)
-      .merge(titleStyle);
+  TextStyle resolvedTitle(BuildContext context) =>
+      (Theme.of(context).textTheme.titleLarge ?? const TextStyle(fontSize: 22))
+          .copyWith(
+            color: onSurface,
+            fontWeight: FontWeight.w700,
+            height: 1.2,
+            letterSpacing: -0.3,
+          )
+          .merge(titleStyle);
 
   /// Resolved body style.
   TextStyle resolvedBody(BuildContext context) =>
@@ -238,32 +241,31 @@ class OkapiThemeData extends ThemeExtension<OkapiThemeData> {
     TextStyle? bodyStyle,
     TextStyle? buttonTextStyle,
     OkapiVisualBuilder? visualBuilder,
-  }) =>
-      OkapiThemeData(
-        primary: primary ?? this.primary,
-        onPrimary: onPrimary ?? this.onPrimary,
-        surface: surface ?? this.surface,
-        onSurface: onSurface ?? this.onSurface,
-        muted: muted ?? this.muted,
-        granted: granted ?? this.granted,
-        danger: danger ?? this.danger,
-        warning: warning ?? this.warning,
-        iconBackground: iconBackground ?? this.iconBackground,
-        iconColor: iconColor ?? this.iconColor,
-        radius: radius ?? this.radius,
-        buttonRadius: buttonRadius ?? this.buttonRadius,
-        iconBadgeSize: iconBadgeSize ?? this.iconBadgeSize,
-        blurSigma: blurSigma ?? this.blurSigma,
-        barrierColor: barrierColor ?? this.barrierColor,
-        maxWidth: maxWidth ?? this.maxWidth,
-        showHandle: showHandle ?? this.showHandle,
-        showSettingsSteps: showSettingsSteps ?? this.showSettingsSteps,
-        useGradientBadge: useGradientBadge ?? this.useGradientBadge,
-        titleStyle: titleStyle ?? this.titleStyle,
-        bodyStyle: bodyStyle ?? this.bodyStyle,
-        buttonTextStyle: buttonTextStyle ?? this.buttonTextStyle,
-        visualBuilder: visualBuilder ?? this.visualBuilder,
-      );
+  }) => OkapiThemeData(
+    primary: primary ?? this.primary,
+    onPrimary: onPrimary ?? this.onPrimary,
+    surface: surface ?? this.surface,
+    onSurface: onSurface ?? this.onSurface,
+    muted: muted ?? this.muted,
+    granted: granted ?? this.granted,
+    danger: danger ?? this.danger,
+    warning: warning ?? this.warning,
+    iconBackground: iconBackground ?? this.iconBackground,
+    iconColor: iconColor ?? this.iconColor,
+    radius: radius ?? this.radius,
+    buttonRadius: buttonRadius ?? this.buttonRadius,
+    iconBadgeSize: iconBadgeSize ?? this.iconBadgeSize,
+    blurSigma: blurSigma ?? this.blurSigma,
+    barrierColor: barrierColor ?? this.barrierColor,
+    maxWidth: maxWidth ?? this.maxWidth,
+    showHandle: showHandle ?? this.showHandle,
+    showSettingsSteps: showSettingsSteps ?? this.showSettingsSteps,
+    useGradientBadge: useGradientBadge ?? this.useGradientBadge,
+    titleStyle: titleStyle ?? this.titleStyle,
+    bodyStyle: bodyStyle ?? this.bodyStyle,
+    buttonTextStyle: buttonTextStyle ?? this.buttonTextStyle,
+    visualBuilder: visualBuilder ?? this.visualBuilder,
+  );
 
   @override
   OkapiThemeData lerp(covariant OkapiThemeData? other, double t) {
@@ -292,7 +294,11 @@ class OkapiThemeData extends ThemeExtension<OkapiThemeData> {
       useGradientBadge: t < 0.5 ? useGradientBadge : other.useGradientBadge,
       titleStyle: TextStyle.lerp(titleStyle, other.titleStyle, t),
       bodyStyle: TextStyle.lerp(bodyStyle, other.bodyStyle, t),
-      buttonTextStyle: TextStyle.lerp(buttonTextStyle, other.buttonTextStyle, t),
+      buttonTextStyle: TextStyle.lerp(
+        buttonTextStyle,
+        other.buttonTextStyle,
+        t,
+      ),
       visualBuilder: t < 0.5 ? visualBuilder : other.visualBuilder,
     );
   }

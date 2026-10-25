@@ -5,12 +5,16 @@ import 'package:okapi/testing.dart';
 
 Future<BuildContext> _pumpApp(WidgetTester tester) async {
   late BuildContext ctx;
-  await tester.pumpWidget(MaterialApp(
-    home: Builder(builder: (c) {
-      ctx = c;
-      return const SizedBox();
-    }),
-  ));
+  await tester.pumpWidget(
+    MaterialApp(
+      home: Builder(
+        builder: (c) {
+          ctx = c;
+          return const SizedBox();
+        },
+      ),
+    ),
+  );
   return ctx;
 }
 
@@ -75,14 +79,18 @@ void main() {
     expect(fake.requests, isEmpty);
   });
 
-  testWidgets('undeclared permission throws a helpful error',
-      (tester) async {
+  testWidgets('undeclared permission throws a helpful error', (tester) async {
     final ctx = await _pumpApp(tester);
     fake.undeclared.add(OkapiPermission.camera);
     await expectLater(
       Okapi.ask(ctx, OkapiPermission.camera),
-      throwsA(isA<OkapiException>()
-          .having((e) => e.code, 'code', OkapiException.notDeclared)),
+      throwsA(
+        isA<OkapiException>().having(
+          (e) => e.code,
+          'code',
+          OkapiException.notDeclared,
+        ),
+      ),
     );
   });
 
@@ -94,11 +102,12 @@ void main() {
     expect(fake.requests, isEmpty);
   });
 
-  testWidgets('permanently denied guides to settings and re-checks',
-      (tester) async {
-    Okapi.configure(OkapiConfig(
-      presenter: OkapiFunctionPresenter((_, __) async => true),
-    ));
+  testWidgets('permanently denied guides to settings and re-checks', (
+    tester,
+  ) async {
+    Okapi.configure(
+      OkapiConfig(presenter: OkapiFunctionPresenter((_, __) async => true)),
+    );
     final ctx = await _pumpApp(tester);
     fake.statuses[OkapiPermission.location] = OkapiStatus.permanentlyDenied;
     fake.onSettingsReturn = {OkapiPermission.location: OkapiStatus.granted};
@@ -108,11 +117,12 @@ void main() {
     expect(r.openedSettings, isTrue);
   });
 
-  testWidgets('"Not now" on the rationale burns no system dialog',
-      (tester) async {
-    Okapi.configure(OkapiConfig(
-      presenter: OkapiFunctionPresenter((_, __) async => false),
-    ));
+  testWidgets('"Not now" on the rationale burns no system dialog', (
+    tester,
+  ) async {
+    Okapi.configure(
+      OkapiConfig(presenter: OkapiFunctionPresenter((_, __) async => false)),
+    );
     final ctx = await _pumpApp(tester);
     final r = await Okapi.ask(ctx, OkapiPermission.contacts);
     expect(r.outcome, OkapiOutcome.dismissedRationale);
@@ -130,10 +140,14 @@ void main() {
     final ctx = await _pumpApp(tester);
     fake.statuses[OkapiPermission.microphone] = OkapiStatus.granted;
     fake.requestResults[OkapiPermission.camera] = OkapiStatus.granted;
-    final r = await Okapi.askAll(
-        ctx, [OkapiPermission.camera, OkapiPermission.microphone]);
-    expect(r.keys.toList(),
-        [OkapiPermission.camera, OkapiPermission.microphone]);
+    final r = await Okapi.askAll(ctx, [
+      OkapiPermission.camera,
+      OkapiPermission.microphone,
+    ]);
+    expect(r.keys.toList(), [
+      OkapiPermission.camera,
+      OkapiPermission.microphone,
+    ]);
     expect(r.values.every((x) => x.isGranted), isTrue);
   });
 
@@ -152,10 +166,14 @@ void main() {
 
   group('ask policy', () {
     testWidgets('"Not now" starts a cooldown', (tester) async {
-      Okapi.configure(OkapiConfig(
-        presenter: OkapiFunctionPresenter((_, __) async => false),
-        askPolicy: const OkapiAskPolicy(cooldownAfterNotNow: Duration(days: 2)),
-      ));
+      Okapi.configure(
+        OkapiConfig(
+          presenter: OkapiFunctionPresenter((_, __) async => false),
+          askPolicy: const OkapiAskPolicy(
+            cooldownAfterNotNow: Duration(days: 2),
+          ),
+        ),
+      );
       final ctx = await _pumpApp(tester);
       final first = await Okapi.ask(ctx, OkapiPermission.camera);
       expect(first.outcome, OkapiOutcome.dismissedRationale);
@@ -165,10 +183,14 @@ void main() {
     });
 
     testWidgets('force bypasses the policy', (tester) async {
-      Okapi.configure(OkapiConfig(
-        presenter: OkapiFunctionPresenter((_, __) async => false),
-        askPolicy: const OkapiAskPolicy(cooldownAfterNotNow: Duration(days: 2)),
-      ));
+      Okapi.configure(
+        OkapiConfig(
+          presenter: OkapiFunctionPresenter((_, __) async => false),
+          askPolicy: const OkapiAskPolicy(
+            cooldownAfterNotNow: Duration(days: 2),
+          ),
+        ),
+      );
       final ctx = await _pumpApp(tester);
       await Okapi.ask(ctx, OkapiPermission.camera);
       final again = await Okapi.ask(ctx, OkapiPermission.camera, force: true);
@@ -176,10 +198,12 @@ void main() {
     });
 
     testWidgets('skips the first launch', (tester) async {
-      Okapi.configure(const OkapiConfig(
-        presenter: OkapiNoUiPresenter(),
-        askPolicy: OkapiAskPolicy(skipFirstLaunches: 1),
-      ));
+      Okapi.configure(
+        const OkapiConfig(
+          presenter: OkapiNoUiPresenter(),
+          askPolicy: OkapiAskPolicy(skipFirstLaunches: 1),
+        ),
+      );
       final ctx = await _pumpApp(tester);
       final r = await Okapi.ask(ctx, OkapiPermission.camera);
       expect(r.outcome, OkapiOutcome.deferredByPolicy);
@@ -188,10 +212,12 @@ void main() {
     });
 
     testWidgets('session limit', (tester) async {
-      Okapi.configure(const OkapiConfig(
-        presenter: OkapiNoUiPresenter(),
-        askPolicy: OkapiAskPolicy(maxPromptsPerSession: 1),
-      ));
+      Okapi.configure(
+        const OkapiConfig(
+          presenter: OkapiNoUiPresenter(),
+          askPolicy: OkapiAskPolicy(maxPromptsPerSession: 1),
+        ),
+      );
       final ctx = await _pumpApp(tester);
       await Okapi.ask(ctx, OkapiPermission.camera);
       final r = await Okapi.ask(ctx, OkapiPermission.microphone);
@@ -218,13 +244,16 @@ void main() {
         OkapiFeatureLevel.partial,
       );
       expect(
-        OkapiFeatureLevel.of(call, {OkapiPermission.camera: OkapiStatus.granted}),
+        OkapiFeatureLevel.of(call, {
+          OkapiPermission.camera: OkapiStatus.granted,
+        }),
         OkapiFeatureLevel.unavailable,
       );
     });
 
-    testWidgets('askFeature reports partial when optional is refused',
-        (tester) async {
+    testWidgets('askFeature reports partial when optional is refused', (
+      tester,
+    ) async {
       final ctx = await _pumpApp(tester);
       fake.requestResults
         ..[OkapiPermission.camera] = OkapiStatus.granted
@@ -238,12 +267,14 @@ void main() {
 
     testWidgets('feature prompt marks optional permissions', (tester) async {
       OkapiPrompt? seen;
-      Okapi.configure(OkapiConfig(
-        presenter: OkapiFunctionPresenter((_, p) async {
-          seen ??= p;
-          return false;
-        }),
-      ));
+      Okapi.configure(
+        OkapiConfig(
+          presenter: OkapiFunctionPresenter((_, p) async {
+            seen ??= p;
+            return false;
+          }),
+        ),
+      );
       final ctx = await _pumpApp(tester);
       await Okapi.askFeature(ctx, call);
       expect(seen?.featureName, 'Video calls');
@@ -271,14 +302,19 @@ void main() {
     testWidgets('Xiaomi shows steps and opens Autostart', (tester) async {
       OkapiPrompt? seen;
       fake.device = fakeAndroidDevice(brand: OkapiOemBrand.xiaomi);
-      fake.oemScreens.addAll({OkapiOemScreen.autostart, OkapiOemScreen.battery});
+      fake.oemScreens.addAll({
+        OkapiOemScreen.autostart,
+        OkapiOemScreen.battery,
+      });
       fake.undeclared.add(OkapiPermission.ignoreBatteryOptimizations);
-      Okapi.configure(OkapiConfig(
-        presenter: OkapiFunctionPresenter((_, p) async {
-          seen ??= p;
-          return true;
-        }),
-      ));
+      Okapi.configure(
+        OkapiConfig(
+          presenter: OkapiFunctionPresenter((_, p) async {
+            seen ??= p;
+            return true;
+          }),
+        ),
+      );
       final ctx = await _pumpApp(tester);
       final r = await Okapi.askBackgroundReliability(ctx);
       expect(seen?.kind, OkapiPromptKind.backgroundReliability);
@@ -289,7 +325,10 @@ void main() {
     });
 
     test('brand detection', () {
-      expect(fakeAndroidDevice(brand: OkapiOemBrand.vivo).oem, OkapiOemBrand.vivo);
+      expect(
+        fakeAndroidDevice(brand: OkapiOemBrand.vivo).oem,
+        OkapiOemBrand.vivo,
+      );
       expect(
         const OkapiDeviceInfo(
           platform: 'android',
@@ -306,20 +345,23 @@ void main() {
   });
 
   group('auto-reset', () {
-    testWidgets('mentions removed permissions and opens settings',
-        (tester) async {
+    testWidgets('mentions removed permissions and opens settings', (
+      tester,
+    ) async {
       OkapiPrompt? seen;
       fake.device = fakeAndroidDevice();
       fake.autoReset = OkapiAutoResetStatus.enabled;
       fake.onAutoResetSettingsReturn = OkapiAutoResetStatus.exempt;
       fake.store['okapi.granted'] = 'camera';
       fake.statuses[OkapiPermission.camera] = OkapiStatus.denied;
-      Okapi.configure(OkapiConfig(
-        presenter: OkapiFunctionPresenter((_, p) async {
-          seen = p;
-          return true;
-        }),
-      ));
+      Okapi.configure(
+        OkapiConfig(
+          presenter: OkapiFunctionPresenter((_, p) async {
+            seen = p;
+            return true;
+          }),
+        ),
+      );
       final ctx = await _pumpApp(tester);
       expect(await Okapi.revokedSinceLastLaunch(), [OkapiPermission.camera]);
       await Okapi.protectFromAutoReset(ctx, onlyIfRevoked: true);
@@ -344,9 +386,13 @@ void main() {
       OkapiPlatform.instance = OkapiDevPlatform(fake);
       fake.statuses[OkapiPermission.camera] = OkapiStatus.granted;
       OkapiDevOverrides.instance.setStatus(
-          OkapiPermission.camera, OkapiStatus.permanentlyDenied);
-      expect(await Okapi.status(OkapiPermission.camera),
-          OkapiStatus.permanentlyDenied);
+        OkapiPermission.camera,
+        OkapiStatus.permanentlyDenied,
+      );
+      expect(
+        await Okapi.status(OkapiPermission.camera),
+        OkapiStatus.permanentlyDenied,
+      );
       OkapiDevOverrides.instance.setStatus(OkapiPermission.camera, null);
       expect(await Okapi.status(OkapiPermission.camera), OkapiStatus.granted);
     });

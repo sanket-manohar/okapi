@@ -149,12 +149,13 @@ class OkapiDevPlatform extends OkapiPlatform {
   @override
   Future<bool> shouldShowRationale(OkapiPermission permission) async =>
       _o.statusOf(permission) != null
-          ? false
-          : await inner.shouldShowRationale(permission);
+      ? false
+      : await inner.shouldShowRationale(permission);
 
   @override
   Future<OkapiServiceStatus> checkServiceStatus(
-          OkapiPermission permission) async =>
+    OkapiPermission permission,
+  ) async =>
       _o.serviceOf(permission) ?? await inner.checkServiceStatus(permission);
 
   @override

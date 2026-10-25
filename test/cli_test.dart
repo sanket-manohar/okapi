@@ -37,10 +37,20 @@ end
 
 void main() {
   test('comments are ignored when scanning', () {
-    expect(stripComments('final p = OkapiPermission.camera; // OkapiPermission.sms', false).$1,
-        isNot(contains('sms')));
-    expect(stripComments("final u = 'https://x.dev'; OkapiPermission.photos", false).$1,
-        contains('photos'));
+    expect(
+      stripComments(
+        'final p = OkapiPermission.camera; // OkapiPermission.sms',
+        false,
+      ).$1,
+      isNot(contains('sms')),
+    );
+    expect(
+      stripComments(
+        "final u = 'https://x.dev'; OkapiPermission.photos",
+        false,
+      ).$1,
+      contains('photos'),
+    );
     final (rest, block) = stripComments('a /* start', false);
     expect(rest.trim(), 'a');
     expect(block, isTrue);
@@ -56,7 +66,12 @@ void main() {
     final used = {OkapiPermission.camera, OkapiPermission.photos};
     final once = syncManifest(manifest, used);
     expect(once, contains('android.permission.CAMERA'));
-    expect(once, contains('android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"'));
+    expect(
+      once,
+      contains(
+        'android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"',
+      ),
+    );
     expect(syncManifest(once, used), once); // Idempotent.
     final removed = syncManifest(once, {});
     expect(removed, isNot(contains('okapi:begin')));
@@ -67,7 +82,10 @@ void main() {
     final once = syncPlist(plist, used);
     expect(once, contains('NSCameraUsageDescription'));
     expect('NSLocationWhenInUseUsageDescription'.allMatches(once).length, 1);
-    final edited = once.replaceFirst(RegExp(r'TODO:[^<]*'), 'Scan QR codes to pay.');
+    final edited = once.replaceFirst(
+      RegExp(r'TODO:[^<]*'),
+      'Scan QR codes to pay.',
+    );
     expect(syncPlist(edited, used), contains('Scan QR codes to pay.'));
   });
 
@@ -75,7 +93,10 @@ void main() {
     final r = syncPodfile(podfile, {'CONTACTS', 'CALENDAR'});
     expect(r.skippedReason, isNull);
     expect(r.text, contains("OKAPI_EXCLUDE_CALENDAR OKAPI_EXCLUDE_CONTACTS"));
-    expect(r.text.indexOf('okapi:begin'), greaterThan(r.text.indexOf('post_install')));
+    expect(
+      r.text.indexOf('okapi:begin'),
+      greaterThan(r.text.indexOf('post_install')),
+    );
     expect(syncPodfile(r.text, {}).text, podfile);
   });
 

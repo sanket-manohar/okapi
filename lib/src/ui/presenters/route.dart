@@ -42,13 +42,17 @@ Future<bool> showOkapiRoute(
         reverseTransitionDuration: const Duration(milliseconds: 260),
         pageBuilder: (c, _, __) => themed(c),
         transitionsBuilder: (c, anim, _, child) {
-          final curved =
-              CurvedAnimation(parent: anim, curve: Curves.easeOutCubic);
+          final curved = CurvedAnimation(
+            parent: anim,
+            curve: Curves.easeOutCubic,
+          );
           return FadeTransition(
             opacity: curved,
             child: SlideTransition(
-              position: Tween(begin: const Offset(0, 0.06), end: Offset.zero)
-                  .animate(curved),
+              position: Tween(
+                begin: const Offset(0, 0.06),
+                end: Offset.zero,
+              ).animate(curved),
               child: child,
             ),
           );
@@ -74,8 +78,10 @@ Future<bool> showOkapiRoute(
       );
       final content = isSheet
           ? SlideTransition(
-              position: Tween(begin: const Offset(0, 1), end: Offset.zero)
-                  .animate(curved),
+              position: Tween(
+                begin: const Offset(0, 1),
+                end: Offset.zero,
+              ).animate(curved),
               child: child,
             )
           : FadeTransition(
@@ -94,8 +100,9 @@ Future<bool> showOkapiRoute(
                 builder: (_, __) {
                   final v = anim.value.clamp(0.0, 1.0);
                   final barrier = ColoredBox(
-                    color: theme.barrierColor
-                        .withAlpha((theme.barrierColor.a * 255 * v).round()),
+                    color: theme.barrierColor.withAlpha(
+                      (theme.barrierColor.a * 255 * v).round(),
+                    ),
                   );
                   if (theme.blurSigma <= 0) return barrier;
                   return BackdropFilter(
@@ -143,7 +150,9 @@ class OkapiSheetFrame extends StatelessWidget {
             color: t.surface,
             elevation: 0,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(t.radius)),
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(t.radius),
+              ),
             ),
             clipBehavior: Clip.antiAlias,
             child: SingleChildScrollView(

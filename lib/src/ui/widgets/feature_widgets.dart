@@ -85,8 +85,7 @@ class _OkapiFeatureBuilderState extends State<OkapiFeatureBuilder> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      widget.builder(context, _result, _ask);
+  Widget build(BuildContext context) => widget.builder(context, _result, _ask);
 }
 
 /// Shows [child] when [feature] can run; otherwise a card that asks for
@@ -127,23 +126,23 @@ class OkapiFeatureGate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => OkapiFeatureBuilder(
-        feature: feature,
-        builder: (context, result, ask) {
-          if (result == null) {
-            return loading ??
-                const Center(
-                  child: SizedBox.square(
-                    dimension: 28,
-                    child: CircularProgressIndicator(strokeWidth: 2.5),
-                  ),
-                );
-          }
-          if (result.isFull) return child;
-          if (result.isAvailable && !requireFull) return partialChild ?? child;
-          return lockedBuilder?.call(context, result, ask) ??
-              OkapiFeatureLockedCard(result: result, onAllow: ask);
-        },
-      );
+    feature: feature,
+    builder: (context, result, ask) {
+      if (result == null) {
+        return loading ??
+            const Center(
+              child: SizedBox.square(
+                dimension: 28,
+                child: CircularProgressIndicator(strokeWidth: 2.5),
+              ),
+            );
+      }
+      if (result.isFull) return child;
+      if (result.isAvailable && !requireFull) return partialChild ?? child;
+      return lockedBuilder?.call(context, result, ask) ??
+          OkapiFeatureLockedCard(result: result, onAllow: ask);
+    },
+  );
 }
 
 /// The default locked card for [OkapiFeatureGate].
@@ -200,7 +199,9 @@ class OkapiFeatureLockedCard extends StatelessWidget {
               const SizedBox(height: 8),
               Text(
                 result.feature.description ??
-                    s.fillWith(s.featureMessage, {'feature': result.feature.name}),
+                    s.fillWith(s.featureMessage, {
+                      'feature': result.feature.name,
+                    }),
                 textAlign: TextAlign.center,
                 style: t.resolvedBody(context),
               ),
@@ -239,9 +240,21 @@ class OkapiFeatureLevelChip extends StatelessWidget {
     final t = OkapiThemeData.of(context);
     final s = Okapi.strings;
     final (label, color, icon) = switch (level) {
-      OkapiFeatureLevel.full => (s.levelFull, t.granted, Icons.check_circle_rounded),
-      OkapiFeatureLevel.partial => (s.levelPartial, t.warning, Icons.adjust_rounded),
-      OkapiFeatureLevel.unavailable => (s.levelOff, t.muted, Icons.radio_button_unchecked_rounded),
+      OkapiFeatureLevel.full => (
+        s.levelFull,
+        t.granted,
+        Icons.check_circle_rounded,
+      ),
+      OkapiFeatureLevel.partial => (
+        s.levelPartial,
+        t.warning,
+        Icons.adjust_rounded,
+      ),
+      OkapiFeatureLevel.unavailable => (
+        s.levelOff,
+        t.muted,
+        Icons.radio_button_unchecked_rounded,
+      ),
     };
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),

@@ -50,7 +50,8 @@ class OkapiBackgroundResult {
   final OkapiPolicyDecision? policy;
 
   @override
-  String toString() => 'OkapiBackgroundResult(${brand.name}, ready: $ready, '
+  String toString() =>
+      'OkapiBackgroundResult(${brand.name}, ready: $ready, '
       'autostart: $autostartAvailable/$autostartConfirmed, '
       'battery: $batteryUnrestricted, dismissed: $dismissed)';
 }

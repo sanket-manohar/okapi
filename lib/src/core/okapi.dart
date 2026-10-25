@@ -136,20 +136,24 @@ class Okapi {
   static Future<void> _grantedChain = Future<void>.value();
 
   static Future<Set<String>> _loadGranted() => _grantedAtLaunch ??= () async {
-        final raw = await OkapiStore.get(_grantedKey) ?? '';
-        final set = raw.split(',').where((e) => e.isNotEmpty).toSet();
-        _grantedNow = {...set};
-        return set;
-      }();
+    final raw = await OkapiStore.get(_grantedKey) ?? '';
+    final set = raw.split(',').where((e) => e.isNotEmpty).toSet();
+    _grantedNow = {...set};
+    return set;
+  }();
 
   static void _trackGranted(OkapiPermission p, OkapiStatus s) {
     if (s.isNotApplicable) return;
-    _grantedChain = _grantedChain.then((_) async {
-      await _loadGranted();
-      final usable = s.isGranted || s.isLimited || s.isProvisional;
-      final changed = usable ? _grantedNow.add(p.name) : _grantedNow.remove(p.name);
-      if (changed) await OkapiStore.set(_grantedKey, _grantedNow.join(','));
-    }).catchError((Object _) {});
+    _grantedChain = _grantedChain
+        .then((_) async {
+          await _loadGranted();
+          final usable = s.isGranted || s.isLimited || s.isProvisional;
+          final changed = usable
+              ? _grantedNow.add(p.name)
+              : _grantedNow.remove(p.name);
+          if (changed) await OkapiStore.set(_grantedKey, _grantedNow.join(','));
+        })
+        .catchError((Object _) {});
   }
 
   /// Permissions that were allowed when the app last ran but are not allowed
@@ -187,7 +191,8 @@ class Okapi {
 
   /// Current statuses of several permissions.
   static Future<Map<OkapiPermission, OkapiStatus>> statuses(
-      Iterable<OkapiPermission> permissions) async {
+    Iterable<OkapiPermission> permissions,
+  ) async {
     final result = <OkapiPermission, OkapiStatus>{};
     for (final p in permissions) {
       result[p] = await status(p);
@@ -231,8 +236,7 @@ class Okapi {
       _platform.shouldShowRationale(permission);
 
   /// Whether Location Services / Bluetooth is switched on.
-  static Future<OkapiServiceStatus> serviceStatus(
-          OkapiPermission permission) =>
+  static Future<OkapiServiceStatus> serviceStatus(OkapiPermission permission) =>
       _platform.checkServiceStatus(permission);
 
   /// Opens this app's page in system settings.
@@ -320,21 +324,25 @@ class Okapi {
     final info = await deviceInfo();
     if (!info.isAndroid) {
       return OkapiBackgroundResult(
-          applicable: false, ready: true, brand: info.oem);
+        applicable: false,
+        ready: true,
+        brand: info.oem,
+      );
     }
     final screens = await oemScreens();
     final hasAutostart = screens.contains(OkapiOemScreen.autostart);
     bool? battery;
     try {
       if (await isDeclared(OkapiPermission.ignoreBatteryOptimizations)) {
-        battery =
-            (await status(OkapiPermission.ignoreBatteryOptimizations)).canProceed;
+        battery = (await status(OkapiPermission.ignoreBatteryOptimizations))
+            .canProceed;
       }
     } catch (_) {
       battery = null;
     }
     final confirmed = await OkapiStore.get(_bgConfirmKey) == '1';
-    final ready = (!hasAutostart || confirmed) &&
+    final ready =
+        (!hasAutostart || confirmed) &&
         (battery ?? (confirmed || !info.oem.restrictsBackground));
     return OkapiBackgroundResult(
       applicable: true,
@@ -377,8 +385,11 @@ class Okapi {
     final start = await _backgroundState();
     if (!start.applicable || (start.ready && !force)) return start;
     if (!force) {
-      final d = await OkapiPolicyEngine.check(c.askPolicy, 'background',
-          settings: true);
+      final d = await OkapiPolicyEngine.check(
+        c.askPolicy,
+        'background',
+        settings: true,
+      );
       if (!d.allowed) return _backgroundState(policy: d);
     }
     if (!context.mounted) return _backgroundState(dismissed: true);
@@ -407,7 +418,10 @@ class Okapi {
       c,
     );
     if (!go) {
-      await OkapiPolicyEngine.record('background', OkapiPolicyEvent.settingsDecline);
+      await OkapiPolicyEngine.record(
+        'background',
+        OkapiPolicyEvent.settingsDecline,
+      );
       return _backgroundState(dismissed: true);
     }
 
@@ -486,8 +500,7 @@ class Okapi {
     OkapiPresenter? presenter,
   }) {
     final c = _config.copyWith(presenter: presenter);
-    return _serial(
-        true, () => _runAutoReset(context, c, onlyIfRevoked, force));
+    return _serial(true, () => _runAutoReset(context, c, onlyIfRevoked, force));
   }
 
   static Future<OkapiAutoResetStatus> _runAutoReset(
@@ -501,8 +514,11 @@ class Okapi {
     final revoked = await revokedSinceLastLaunch();
     if (onlyIfRevoked && revoked.isEmpty && !force) return st;
     if (!force) {
-      final d = await OkapiPolicyEngine.check(c.askPolicy, 'autoReset',
-          settings: true);
+      final d = await OkapiPolicyEngine.check(
+        c.askPolicy,
+        'autoReset',
+        settings: true,
+      );
       if (!d.allowed) return st;
     }
     if (!context.mounted) return st;
@@ -524,8 +540,9 @@ class Okapi {
           permissions: revoked,
           title: s.fillWith(s.autoResetTitle, values),
           message: s.fillWith(
-              revoked.isEmpty ? s.autoResetMessage : s.autoResetRevokedMessage,
-              values),
+            revoked.isEmpty ? s.autoResetMessage : s.autoResetRevokedMessage,
+            values,
+          ),
           primaryLabel: s.autoResetOpen,
           secondaryLabel: s.autoResetNotNow,
           steps: s.autoResetSteps,
@@ -535,7 +552,10 @@ class Okapi {
       c,
     );
     if (!go) {
-      await OkapiPolicyEngine.record('autoReset', OkapiPolicyEvent.settingsDecline);
+      await OkapiPolicyEngine.record(
+        'autoReset',
+        OkapiPolicyEvent.settingsDecline,
+      );
       return st;
     }
     if (await openAutoResetSettings()) {
@@ -609,7 +629,9 @@ class Okapi {
       offerSettings: offerSettings,
     );
     return _serial(
-        true, () => _runAskAll(context, permissions, c, reasons, force: force));
+      true,
+      () => _runAskAll(context, permissions, c, reasons, force: force),
+    );
   }
 
   /// Current level of a feature. Never shows UI.
@@ -639,8 +661,13 @@ class Okapi {
     );
     return _serial(true, () async {
       final results = await _runAskAll(
-          context, feature.permissions, c, feature.reasons,
-          feature: feature, force: force);
+        context,
+        feature.permissions,
+        c,
+        feature.reasons,
+        feature: feature,
+        force: force,
+      );
       final st = {for (final e in results.entries) e.key: e.value.status};
       return OkapiFeatureResult(
         feature: feature,
@@ -677,9 +704,7 @@ class Okapi {
     String fillMany(String t) =>
         perms.length == 1 ? fill(t) : t.replaceAll('{permission}', names);
 
-    final reasonMap = {
-      for (final q in perms) q: reasons[q] ?? s.reasonOf(q),
-    };
+    final reasonMap = {for (final q in perms) q: reasons[q] ?? s.reasonOf(q)};
     if (reason != null) reasonMap[p] = reason;
     final optional = feature == null
         ? const <OkapiPermission>{}
@@ -691,53 +716,82 @@ class Okapi {
       String message,
       String primary,
       String? secondary,
-    ) =>
-        OkapiPrompt(
-          kind: kind,
-          permissions: perms,
-          title: title,
-          message: message,
-          primaryLabel: primary,
-          secondaryLabel: secondary,
-          reasons: reasonMap,
-          statuses: statuses,
-          featureName: featureName,
-          optional: optional,
-        );
+    ) => OkapiPrompt(
+      kind: kind,
+      permissions: perms,
+      title: title,
+      message: message,
+      primaryLabel: primary,
+      secondaryLabel: secondary,
+      reasons: reasonMap,
+      statuses: statuses,
+      featureName: featureName,
+      optional: optional,
+    );
 
     final prompt = switch (kind) {
-      OkapiPromptKind.rationale => make(fill(s.rationaleTitle),
-          reason ?? fill(s.rationaleMessage), s.rationaleAllow, s.rationaleNotNow),
-      OkapiPromptKind.denied => make(fill(s.deniedTitle), fill(s.deniedMessage),
-          s.deniedRetry, s.deniedCancel),
-      OkapiPromptKind.settings => make(fillMany(s.settingsTitle),
-          fillMany(s.settingsMessage), s.settingsOpen, s.settingsCancel),
-      OkapiPromptKind.serviceDisabled => make(fill(s.serviceTitle),
-          fill(s.serviceMessage), s.serviceOpen, s.serviceCancel),
-      OkapiPromptKind.restricted => make(fill(s.restrictedTitle),
-          fill(s.restrictedMessage), s.restrictedOk, null),
-      OkapiPromptKind.multiRationale => featureName == null
-          ? make(s.multiTitle, s.multiMessage, s.multiAllow, s.multiNotNow)
-          : make(
-              s.fillWith(s.featureTitle, {'feature': featureName}),
-              feature?.description ??
-                  s.fillWith(s.featureMessage, {'feature': featureName}),
-              s.multiAllow,
-              s.multiNotNow),
+      OkapiPromptKind.rationale => make(
+        fill(s.rationaleTitle),
+        reason ?? fill(s.rationaleMessage),
+        s.rationaleAllow,
+        s.rationaleNotNow,
+      ),
+      OkapiPromptKind.denied => make(
+        fill(s.deniedTitle),
+        fill(s.deniedMessage),
+        s.deniedRetry,
+        s.deniedCancel,
+      ),
+      OkapiPromptKind.settings => make(
+        fillMany(s.settingsTitle),
+        fillMany(s.settingsMessage),
+        s.settingsOpen,
+        s.settingsCancel,
+      ),
+      OkapiPromptKind.serviceDisabled => make(
+        fill(s.serviceTitle),
+        fill(s.serviceMessage),
+        s.serviceOpen,
+        s.serviceCancel,
+      ),
+      OkapiPromptKind.restricted => make(
+        fill(s.restrictedTitle),
+        fill(s.restrictedMessage),
+        s.restrictedOk,
+        null,
+      ),
+      OkapiPromptKind.multiRationale =>
+        featureName == null
+            ? make(s.multiTitle, s.multiMessage, s.multiAllow, s.multiNotNow)
+            : make(
+                s.fillWith(s.featureTitle, {'feature': featureName}),
+                feature?.description ??
+                    s.fillWith(s.featureMessage, {'feature': featureName}),
+                s.multiAllow,
+                s.multiNotNow,
+              ),
       // Built by their own flows; listed for completeness.
       OkapiPromptKind.autoReset ||
       OkapiPromptKind.backgroundReliability ||
-      OkapiPromptKind.backgroundConfirm =>
-        make(fill(s.rationaleTitle), fill(s.rationaleMessage), s.rationaleAllow,
-            s.rationaleNotNow),
+      OkapiPromptKind.backgroundConfirm => make(
+        fill(s.rationaleTitle),
+        fill(s.rationaleMessage),
+        s.rationaleAllow,
+        s.rationaleNotNow,
+      ),
     };
     return _finalize(c, prompt);
   }
 
   static Future<bool> _show(
-      BuildContext context, OkapiPrompt prompt, OkapiConfig c) async {
+    BuildContext context,
+    OkapiPrompt prompt,
+    OkapiConfig c,
+  ) async {
     final presenter = c.presenter ?? const OkapiSheetPresenter();
-    _log('show ${prompt.kind.name} for ${prompt.permissions.map((p) => p.name)}');
+    _log(
+      'show ${prompt.kind.name} for ${prompt.permissions.map((p) => p.name)}',
+    );
     final accepted = await presenter.present(context, prompt);
     for (final o in c.observers) {
       o.onPrompt(prompt, accepted);
@@ -775,10 +829,10 @@ class Okapi {
 
   /// The policy without cooldowns (session/launch rules only).
   static OkapiAskPolicy _sessionOnly(OkapiAskPolicy p) => p.copyWith(
-        cooldownAfterNotNow: Duration.zero,
-        cooldownAfterDenied: Duration.zero,
-        cooldownAfterSettingsDecline: Duration.zero,
-      );
+    cooldownAfterNotNow: Duration.zero,
+    cooldownAfterDenied: Duration.zero,
+    cooldownAfterSettingsDecline: Duration.zero,
+  );
 
   static Future<OkapiResult> _runAsk(
     BuildContext context,
@@ -794,8 +848,10 @@ class Okapi {
     Future<OkapiPolicyDecision> allowed({required bool settings}) {
       if (force) return Future.value(const OkapiPolicyDecision.allow());
       return OkapiPolicyEngine.check(
-          counted ? _cooldownsOnly(c.askPolicy) : c.askPolicy, p.name,
-          settings: settings);
+        counted ? _cooldownsOnly(c.askPolicy) : c.askPolicy,
+        p.name,
+        settings: settings,
+      );
     }
 
     void count() {
@@ -831,8 +887,11 @@ class Okapi {
     // 3. Restricted: explain once, never nag.
     if (st.isRestricted) {
       if (context.mounted) {
-        await _show(context, _buildPrompt(c, OkapiPromptKind.restricted, [p]),
-            c);
+        await _show(
+          context,
+          _buildPrompt(c, OkapiPromptKind.restricted, [p]),
+          c,
+        );
       }
       return _finish(c, p, st, OkapiOutcome.restricted);
     }
@@ -873,8 +932,7 @@ class Okapi {
           return _finish(c, p, st, OkapiOutcome.granted, attempts: attempts);
         }
         if (st.isRestricted) {
-          return _finish(c, p, st, OkapiOutcome.restricted,
-              attempts: attempts);
+          return _finish(c, p, st, OkapiOutcome.restricted, attempts: attempts);
         }
         await OkapiPolicyEngine.record(p.name, OkapiPolicyEvent.denied);
         if (st.isPermanentlyDenied) {
@@ -900,18 +958,34 @@ class Okapi {
     final offer =
         c.offerSettings && (!becameBlockedNow || c.settingsRightAfterRefusal);
     if (!offer || !context.mounted) {
-      return _finish(c, p, st, OkapiOutcome.permanentlyDenied,
-          attempts: attempts);
+      return _finish(
+        c,
+        p,
+        st,
+        OkapiOutcome.permanentlyDenied,
+        attempts: attempts,
+      );
     }
     final d = await allowed(settings: true);
     if (!d.allowed) {
-      return _finish(c, p, st, OkapiOutcome.deferredByPolicy,
-          attempts: attempts, policy: d);
+      return _finish(
+        c,
+        p,
+        st,
+        OkapiOutcome.deferredByPolicy,
+        attempts: attempts,
+        policy: d,
+      );
     }
     count();
     if (!context.mounted) {
-      return _finish(c, p, st, OkapiOutcome.permanentlyDenied,
-          attempts: attempts);
+      return _finish(
+        c,
+        p,
+        st,
+        OkapiOutcome.permanentlyDenied,
+        attempts: attempts,
+      );
     }
     final go = await _show(
       context,
@@ -920,8 +994,13 @@ class Okapi {
     );
     if (!go) {
       await OkapiPolicyEngine.record(p.name, OkapiPolicyEvent.settingsDecline);
-      return _finish(c, p, st, OkapiOutcome.permanentlyDenied,
-          attempts: attempts);
+      return _finish(
+        c,
+        p,
+        st,
+        OkapiOutcome.permanentlyDenied,
+        attempts: attempts,
+      );
     }
     if (await openAppSettings()) await nextResume();
     st = await status(p);
@@ -932,7 +1011,9 @@ class Okapi {
       c,
       p,
       st,
-      st.canProceed ? OkapiOutcome.granted : OkapiOutcome.settingsReturnedDenied,
+      st.canProceed
+          ? OkapiOutcome.granted
+          : OkapiOutcome.settingsReturnedDenied,
       attempts: attempts,
       openedSettings: true,
     );
@@ -971,26 +1052,48 @@ class Okapi {
     // cooldowns per permission.
     if (!force && (toAsk.isNotEmpty || blocked.isNotEmpty)) {
       final session = await OkapiPolicyEngine.check(
-          _sessionOnly(c.askPolicy), 'session');
+        _sessionOnly(c.askPolicy),
+        'session',
+      );
       final cooldowns = _cooldownsOnly(c.askPolicy);
       Future<bool> keep(OkapiPermission p, bool settings) async {
         final d = session.allowed
-            ? await OkapiPolicyEngine.check(cooldowns, p.name, settings: settings)
+            ? await OkapiPolicyEngine.check(
+                cooldowns,
+                p.name,
+                settings: settings,
+              )
             : session;
         if (d.allowed) return true;
-        results[p] = _finish(c, p, current[p]!, OkapiOutcome.deferredByPolicy,
-            policy: d);
+        results[p] = _finish(
+          c,
+          p,
+          current[p]!,
+          OkapiOutcome.deferredByPolicy,
+          policy: d,
+        );
         return false;
       }
 
-      toAsk = [for (final p in toAsk) if (await keep(p, false)) p];
+      toAsk = [
+        for (final p in toAsk)
+          if (await keep(p, false)) p,
+      ];
       if (!c.offerSettings) {
         for (final p in blocked) {
-          results[p] = _finish(c, p, current[p]!, OkapiOutcome.permanentlyDenied);
+          results[p] = _finish(
+            c,
+            p,
+            current[p]!,
+            OkapiOutcome.permanentlyDenied,
+          );
         }
         blocked = [];
       } else {
-        blocked = [for (final p in blocked) if (await keep(p, true)) p];
+        blocked = [
+          for (final p in blocked)
+            if (await keep(p, true)) p,
+        ];
       }
     }
     if (toAsk.isNotEmpty || blocked.isNotEmpty) OkapiPolicyEngine.countPrompt();
@@ -1003,8 +1106,14 @@ class Okapi {
         } else {
           go = await _show(
             context,
-            _buildPrompt(c, OkapiPromptKind.multiRationale, toAsk,
-                reasons: reasons, statuses: current, feature: feature),
+            _buildPrompt(
+              c,
+              OkapiPromptKind.multiRationale,
+              toAsk,
+              reasons: reasons,
+              statuses: current,
+              feature: feature,
+            ),
             c,
           );
         }
@@ -1012,8 +1121,12 @@ class Okapi {
       if (!go) {
         for (final p in toAsk) {
           await OkapiPolicyEngine.record(p.name, OkapiPolicyEvent.notNow);
-          results[p] =
-              _finish(c, p, current[p]!, OkapiOutcome.dismissedRationale);
+          results[p] = _finish(
+            c,
+            p,
+            current[p]!,
+            OkapiOutcome.dismissedRationale,
+          );
         }
       } else {
         final asked = await requestMany(toAsk);
@@ -1029,10 +1142,10 @@ class Okapi {
             s.canProceed
                 ? OkapiOutcome.granted
                 : s.isRestricted
-                    ? OkapiOutcome.restricted
-                    : s.isPermanentlyDenied
-                        ? OkapiOutcome.permanentlyDenied
-                        : OkapiOutcome.denied,
+                ? OkapiOutcome.restricted
+                : s.isPermanentlyDenied
+                ? OkapiOutcome.permanentlyDenied
+                : OkapiOutcome.denied,
             attempts: 1,
           );
         }
@@ -1042,8 +1155,14 @@ class Okapi {
     if (blocked.isNotEmpty) {
       var opened = false;
       if (c.offerSettings && context.mounted) {
-        final prompt = _buildPrompt(c, OkapiPromptKind.settings, blocked,
-            reasons: reasons, statuses: current, feature: feature);
+        final prompt = _buildPrompt(
+          c,
+          OkapiPromptKind.settings,
+          blocked,
+          reasons: reasons,
+          statuses: current,
+          feature: feature,
+        );
         final go = await _show(context, prompt, c);
         if (go && await openAppSettings()) {
           opened = true;
@@ -1053,7 +1172,10 @@ class Okapi {
       for (final p in blocked) {
         final s = opened ? await status(p) : current[p]!;
         if (!s.canProceed) {
-          await OkapiPolicyEngine.record(p.name, OkapiPolicyEvent.settingsDecline);
+          await OkapiPolicyEngine.record(
+            p.name,
+            OkapiPolicyEvent.settingsDecline,
+          );
         }
         results[p] = _finish(
           c,
@@ -1062,8 +1184,8 @@ class Okapi {
           s.canProceed
               ? OkapiOutcome.granted
               : opened
-                  ? OkapiOutcome.settingsReturnedDenied
-                  : OkapiOutcome.permanentlyDenied,
+              ? OkapiOutcome.settingsReturnedDenied
+              : OkapiOutcome.permanentlyDenied,
           openedSettings: opened,
         );
       }

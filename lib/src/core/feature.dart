@@ -55,9 +55,9 @@ class OkapiFeature {
 
   /// Every permission, required first, without duplicates.
   List<OkapiPermission> get permissions => [
-        ...required,
-        ...optional.where((p) => !required.contains(p)),
-      ];
+    ...required,
+    ...optional.where((p) => !required.contains(p)),
+  ];
 
   /// Whether [p] is optional for this feature.
   bool isOptional(OkapiPermission p) =>
@@ -86,10 +86,14 @@ enum OkapiFeatureLevel {
 
   /// Computes the level from statuses.
   static OkapiFeatureLevel of(
-      OkapiFeature feature, Map<OkapiPermission, OkapiStatus> statuses) {
+    OkapiFeature feature,
+    Map<OkapiPermission, OkapiStatus> statuses,
+  ) {
     bool ok(OkapiPermission p) => statuses[p]?.canProceed ?? false;
     if (!feature.required.every(ok)) return unavailable;
-    final optional = feature.optional.where((p) => !feature.required.contains(p));
+    final optional = feature.optional.where(
+      (p) => !feature.required.contains(p),
+    );
     return optional.every(ok) ? full : partial;
   }
 }
@@ -131,8 +135,9 @@ class OkapiFeatureResult {
       feature.required.where((p) => !has(p)).toList();
 
   /// Optional permissions that are missing.
-  List<OkapiPermission> get missingOptional =>
-      feature.optional.where((p) => !feature.required.contains(p) && !has(p)).toList();
+  List<OkapiPermission> get missingOptional => feature.optional
+      .where((p) => !feature.required.contains(p) && !has(p))
+      .toList();
 
   @override
   String toString() => 'OkapiFeatureResult(${feature.id}: ${level.name})';

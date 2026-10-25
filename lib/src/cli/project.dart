@@ -44,8 +44,10 @@ class OkapiProject {
   /// The app's name from pubspec.yaml.
   String get name {
     try {
-      final m = RegExp(r'^name:\s*(\S+)', multiLine: true)
-          .firstMatch(pubspec.readAsStringSync());
+      final m = RegExp(
+        r'^name:\s*(\S+)',
+        multiLine: true,
+      ).firstMatch(pubspec.readAsStringSync());
       return m?.group(1) ?? 'app';
     } catch (_) {
       return 'app';
@@ -63,7 +65,8 @@ class OkapiProject {
   static OkapiProject? find([String? start]) {
     var dir = Directory(start ?? Directory.current.path).absolute;
     for (var i = 0; i < 12; i++) {
-      if (File('${dir.path}${Platform.pathSeparator}pubspec.yaml').existsSync()) {
+      if (File('${dir.path}${Platform.pathSeparator}pubspec.yaml')
+          .existsSync()) {
         return OkapiProject(dir);
       }
       final parent = dir.parent;
@@ -106,7 +109,9 @@ class CliConfig {
   /// Reads the section from [pubspec] text.
   static CliConfig parse(String pubspec) {
     final lines = pubspec.split('\n');
-    final start = lines.indexWhere((l) => RegExp(r'^okapi:\s*(#.*)?$').hasMatch(l));
+    final start = lines.indexWhere(
+      (l) => RegExp(r'^okapi:\s*(#.*)?$').hasMatch(l),
+    );
     if (start < 0) return const CliConfig();
     final values = <String, List<String>>{};
     String? current;
@@ -122,17 +127,21 @@ class CliConfig {
         final v = kv.group(2)!.trim();
         values[current] = [];
         if (v.startsWith('[')) {
-          values[current]!.addAll(v
-              .replaceAll('[', '')
-              .replaceAll(']', '')
-              .split(',')
-              .map((e) => e.trim().replaceAll("'", '').replaceAll('"', ''))
-              .where((e) => e.isNotEmpty));
+          values[current]!.addAll(
+            v
+                .replaceAll('[', '')
+                .replaceAll(']', '')
+                .split(',')
+                .map((e) => e.trim().replaceAll("'", '').replaceAll('"', ''))
+                .where((e) => e.isNotEmpty),
+          );
         } else if (v.isNotEmpty) {
           values[current]!.add(v.replaceAll("'", '').replaceAll('"', ''));
         }
       } else if (item != null && current != null) {
-        values[current]!.add(item.group(1)!.replaceAll("'", '').replaceAll('"', ''));
+        values[current]!.add(
+          item.group(1)!.replaceAll("'", '').replaceAll('"', ''),
+        );
       }
     }
     final problems = <String>[];
@@ -149,7 +158,8 @@ class CliConfig {
       for (final f in values['ios_keep'] ?? const <String>[])
         f.toUpperCase().replaceAll('OKAPI_EXCLUDE_', ''),
     };
-    final mp = (values['manage_podfile'] ?? const ['true']).firstOrNull ?? 'true';
+    final mp =
+        (values['manage_podfile'] ?? const ['true']).firstOrNull ?? 'true';
     return CliConfig(
       extra: extra,
       iosKeep: keep,
@@ -222,12 +232,13 @@ Usage scanUsage(OkapiProject project, {List<String> dirs = const ['lib']}) {
   for (final d in dirs) {
     final dir = Directory('${project.root.path}${Platform.pathSeparator}$d');
     if (!dir.existsSync()) continue;
-    final files = dir
-        .listSync(recursive: true, followLinks: false)
-        .whereType<File>()
-        .where((f) => f.path.endsWith('.dart'))
-        .toList()
-      ..sort((a, b) => a.path.compareTo(b.path));
+    final files =
+        dir
+            .listSync(recursive: true, followLinks: false)
+            .whereType<File>()
+            .where((f) => f.path.endsWith('.dart'))
+            .toList()
+          ..sort((a, b) => a.path.compareTo(b.path));
     for (final f in files) {
       List<String> lines;
       try {
@@ -269,17 +280,25 @@ class ManifestEntry {
 
 /// Replaces XML comments with spaces (keeps offsets).
 String blankXmlComments(String xml) => xml.replaceAllMapped(
-    RegExp(r'<!--[\s\S]*?-->'), (m) => ' ' * m.group(0)!.length);
+  RegExp(r'<!--[\s\S]*?-->'),
+  (m) => ' ' * m.group(0)!.length,
+);
 
 /// Reads `<uses-permission>` entries.
 List<ManifestEntry> parseManifest(String xml) {
   final clean = blankXmlComments(xml);
   final out = <ManifestEntry>[];
-  for (final m in RegExp(r'<uses-permission(?:-sdk-23)?\b([^>]*)>').allMatches(clean)) {
+  for (final m in RegExp(
+    r'<uses-permission(?:-sdk-23)?\b([^>]*)>',
+  ).allMatches(clean)) {
     final attrs = m.group(1)!;
-    final name = RegExp(r'android:name\s*=\s*"([^"]+)"').firstMatch(attrs)?.group(1);
+    final name = RegExp(r'android:name\s*=\s*"([^"]+)"')
+        .firstMatch(attrs)
+        ?.group(1);
     if (name == null) continue;
-    final max = RegExp(r'android:maxSdkVersion\s*=\s*"(\d+)"').firstMatch(attrs)?.group(1);
+    final max = RegExp(r'android:maxSdkVersion\s*=\s*"(\d+)"')
+        .firstMatch(attrs)
+        ?.group(1);
     out.add(ManifestEntry(name, max == null ? null : int.parse(max)));
   }
   return out;
@@ -289,19 +308,20 @@ List<ManifestEntry> parseManifest(String xml) {
 Map<String, String> parsePlistStrings(String xml) {
   final clean = blankXmlComments(xml);
   return {
-    for (final m in RegExp(r'<key>\s*([^<]+?)\s*</key>\s*<string>([\s\S]*?)</string>')
-        .allMatches(clean))
+    for (final m in RegExp(
+      r'<key>\s*([^<]+?)\s*</key>\s*<string>([\s\S]*?)</string>',
+    ).allMatches(clean))
       m.group(1)!: m.group(2)!.trim(),
   };
 }
 
 /// iOS flags in a Podfile, ignoring commented lines.
 Set<String> parsePodfileFlags(String podfile) => {
-      for (final line in podfile.split('\n'))
-        if (!line.trimLeft().startsWith('#'))
-          for (final m in RegExp(r'OKAPI_EXCLUDE_([A-Z_]+)').allMatches(line))
-            m.group(1)!,
-    };
+  for (final line in podfile.split('\n'))
+    if (!line.trimLeft().startsWith('#'))
+      for (final m in RegExp(r'OKAPI_EXCLUDE_([A-Z_]+)').allMatches(line))
+        m.group(1)!,
+};
 
 /// A marked region of a file, covering whole lines.
 class ManagedRange {

@@ -20,14 +20,13 @@ class OkapiStrings {
     this.rationaleAllow = 'Continue',
     this.rationaleNotNow = 'Not now',
     this.deniedTitle = '{permission} is needed',
-    this.deniedMessage =
-        'Without {permission}, this feature can\'t work. Would you like to try again?',
+    this.deniedMessage = 'Without {permission}, this feature can\'t work. Would you like to try again?',
     this.deniedRetry = 'Try again',
     this.deniedCancel = 'Cancel',
     this.settingsTitle = 'Turn on {permission} in Settings',
     this.settingsMessage =
         '{permission} was turned off for this app. Open Settings, tap '
-            'Permissions, and allow {permission}.',
+        'Permissions, and allow {permission}.',
     this.settingsOpen = 'Open Settings',
     this.settingsCancel = 'Not now',
     this.serviceTitle = '{service} is off',
@@ -38,7 +37,7 @@ class OkapiStrings {
     this.restrictedTitle = '{permission} is restricted',
     this.restrictedMessage =
         'This permission is blocked by device restrictions (such as Screen '
-            'Time or a work profile) and can\'t be changed here.',
+        'Time or a work profile) and can\'t be changed here.',
     this.restrictedOk = 'OK',
     this.multiTitle = 'A few permissions to get started',
     this.multiMessage = 'Here is what this app needs and why.',
@@ -61,20 +60,16 @@ class OkapiStrings {
     this.featureMessage = 'Allow the following so {feature} works.',
     this.optionalLabel = 'Optional',
     this.backgroundTitle = 'Keep {app} working in the background',
-    this.backgroundMessage =
-        'Your {brand} phone may pause {app} to save battery. Follow these steps so notifications and reminders arrive on time.',
+    this.backgroundMessage = 'Your {brand} phone may pause {app} to save battery. Follow these steps so notifications and reminders arrive on time.',
     this.backgroundOpen = 'Open settings',
     this.backgroundNotNow = 'Not now',
     this.backgroundConfirmTitle = 'Did you turn it on?',
-    this.backgroundConfirmMessage =
-        'Phones don\'t let apps check this setting. Did you allow {app} to start and run in the background?',
+    this.backgroundConfirmMessage = 'Phones don\'t let apps check this setting. Did you allow {app} to start and run in the background?',
     this.backgroundConfirmYes = 'Yes, it\'s on',
     this.backgroundConfirmNo = 'Not yet',
     this.autoResetTitle = 'Keep {app}\'s permissions',
-    this.autoResetMessage =
-        'Android removes permissions from apps you don\'t open for a few months. Turn this off so {app} keeps working.',
-    this.autoResetRevokedMessage =
-        'Android removed {list} because {app} wasn\'t used for a while. Turn off auto-reset so it doesn\'t happen again.',
+    this.autoResetMessage = 'Android removes permissions from apps you don\'t open for a few months. Turn this off so {app} keeps working.',
+    this.autoResetRevokedMessage = 'Android removed {list} because {app} wasn\'t used for a while. Turn off auto-reset so it doesn\'t happen again.',
     this.autoResetSteps = const [
       'Tap Open settings.',
       'Turn off "Pause app activity if unused" (on some phones: "Remove permissions if app isn\'t used").',
@@ -83,17 +78,14 @@ class OkapiStrings {
     this.autoResetNotNow = 'Not now',
     this.oemSteps = const {},
     this.privacyTitle = 'Privacy & permissions',
-    this.privacyIntro =
-        'See what this app can access and why. You can change any of these at any time.',
+    this.privacyIntro = 'See what this app can access and why. You can change any of these at any time.',
     this.privacyFeatures = 'Features',
     this.privacyPermissions = 'Permissions',
     this.privacyBackground = 'Background activity',
-    this.privacyBackgroundBody =
-        '{brand} phones may pause apps to save battery. Allow {app} so reminders arrive on time.',
+    this.privacyBackgroundBody = '{brand} phones may pause apps to save battery. Allow {app} so reminders arrive on time.',
     this.privacyBackgroundAction = 'Set up',
     this.privacyAutoReset = 'Unused app protection',
-    this.privacyAutoResetOn =
-        'Android may remove permissions if you don\'t open the app for a few months.',
+    this.privacyAutoResetOn = 'Android may remove permissions if you don\'t open the app for a few months.',
     this.privacyAutoResetOff =
         'Permissions are kept even if you don\'t use the app for a while.',
     this.privacyAutoResetAction = 'Keep permissions',
@@ -375,13 +367,11 @@ class OkapiStrings {
     rationaleAllow: 'आगे बढ़ें',
     rationaleNotNow: 'अभी नहीं',
     deniedTitle: '{permission} ज़रूरी है',
-    deniedMessage:
-        '{permission} के बिना यह फ़ीचर काम नहीं करेगा। क्या आप फिर से कोशिश करना चाहेंगे?',
+    deniedMessage: '{permission} के बिना यह फ़ीचर काम नहीं करेगा। क्या आप फिर से कोशिश करना चाहेंगे?',
     deniedRetry: 'फिर से कोशिश करें',
     deniedCancel: 'रद्द करें',
     settingsTitle: 'सेटिंग्स में {permission} चालू करें',
-    settingsMessage:
-        'इस ऐप के लिए {permission} बंद है। सेटिंग्स खोलें, अनुमतियाँ (Permissions) पर टैप करें और {permission} चालू करें।',
+    settingsMessage: 'इस ऐप के लिए {permission} बंद है। सेटिंग्स खोलें, अनुमतियाँ (Permissions) पर टैप करें और {permission} चालू करें।',
     settingsOpen: 'सेटिंग्स खोलें',
     settingsCancel: 'अभी नहीं',
     serviceTitle: '{service} बंद है',
@@ -389,8 +379,7 @@ class OkapiStrings {
     serviceOpen: 'चालू करें',
     serviceCancel: 'रद्द करें',
     restrictedTitle: '{permission} प्रतिबंधित है',
-    restrictedMessage:
-        'यह अनुमति डिवाइस प्रतिबंधों (जैसे Screen Time या वर्क प्रोफ़ाइल) के कारण बंद है और यहाँ से बदली नहीं जा सकती।',
+    restrictedMessage: 'यह अनुमति डिवाइस प्रतिबंधों (जैसे Screen Time या वर्क प्रोफ़ाइल) के कारण बंद है और यहाँ से बदली नहीं जा सकती।',
     restrictedOk: 'ठीक है',
     multiTitle: 'शुरू करने के लिए कुछ अनुमतियाँ',
     multiMessage: 'ऐप को क्या चाहिए और क्यों, यहाँ देखें।',
@@ -413,20 +402,16 @@ class OkapiStrings {
     featureMessage: '{feature} चलाने के लिए ये अनुमतियाँ दें।',
     optionalLabel: 'वैकल्पिक',
     backgroundTitle: '{app} को बैकग्राउंड में चालू रखें',
-    backgroundMessage:
-        'आपका {brand} फ़ोन बैटरी बचाने के लिए {app} को रोक सकता है। नोटिफ़िकेशन और रिमाइंडर समय पर पाने के लिए ये स्टेप्स अपनाएँ।',
+    backgroundMessage: 'आपका {brand} फ़ोन बैटरी बचाने के लिए {app} को रोक सकता है। नोटिफ़िकेशन और रिमाइंडर समय पर पाने के लिए ये स्टेप्स अपनाएँ।',
     backgroundOpen: 'सेटिंग्स खोलें',
     backgroundNotNow: 'अभी नहीं',
     backgroundConfirmTitle: 'क्या आपने इसे चालू किया?',
-    backgroundConfirmMessage:
-        'फ़ोन ऐप्स को यह सेटिंग जाँचने नहीं देते। क्या आपने {app} को बैकग्राउंड में चलने की अनुमति दी?',
+    backgroundConfirmMessage: 'फ़ोन ऐप्स को यह सेटिंग जाँचने नहीं देते। क्या आपने {app} को बैकग्राउंड में चलने की अनुमति दी?',
     backgroundConfirmYes: 'हाँ, चालू है',
     backgroundConfirmNo: 'अभी नहीं',
     autoResetTitle: '{app} की अनुमतियाँ बनाए रखें',
-    autoResetMessage:
-        'कुछ महीनों तक न खोले गए ऐप्स की अनुमतियाँ Android हटा देता है। {app} ठीक से चलता रहे, इसके लिए इसे बंद करें।',
-    autoResetRevokedMessage:
-        '{app} कुछ समय इस्तेमाल न होने से Android ने {list} हटा दिया। दोबारा ऐसा न हो, इसके लिए ऑटो-रीसेट बंद करें।',
+    autoResetMessage: 'कुछ महीनों तक न खोले गए ऐप्स की अनुमतियाँ Android हटा देता है। {app} ठीक से चलता रहे, इसके लिए इसे बंद करें।',
+    autoResetRevokedMessage: '{app} कुछ समय इस्तेमाल न होने से Android ने {list} हटा दिया। दोबारा ऐसा न हो, इसके लिए ऑटो-रीसेट बंद करें।',
     autoResetSteps: [
       'सेटिंग्स खोलें पर टैप करें।',
       '"Pause app activity if unused" (या "Remove permissions if app isn\'t used") बंद करें।',
@@ -434,18 +419,17 @@ class OkapiStrings {
     autoResetOpen: 'सेटिंग्स खोलें',
     autoResetNotNow: 'अभी नहीं',
     privacyTitle: 'प्राइवेसी और अनुमतियाँ',
-    privacyIntro:
-        'देखें कि यह ऐप क्या एक्सेस कर सकता है और क्यों। आप इन्हें कभी भी बदल सकते हैं।',
+    privacyIntro: 'देखें कि यह ऐप क्या एक्सेस कर सकता है और क्यों। आप इन्हें कभी भी बदल सकते हैं।',
     privacyFeatures: 'फ़ीचर',
     privacyPermissions: 'अनुमतियाँ',
     privacyBackground: 'बैकग्राउंड गतिविधि',
-    privacyBackgroundBody:
-        '{brand} फ़ोन बैटरी बचाने के लिए ऐप्स रोक सकते हैं। रिमाइंडर समय पर पाने के लिए {app} को अनुमति दें।',
+    privacyBackgroundBody: '{brand} फ़ोन बैटरी बचाने के लिए ऐप्स रोक सकते हैं। रिमाइंडर समय पर पाने के लिए {app} को अनुमति दें।',
     privacyBackgroundAction: 'सेट करें',
     privacyAutoReset: 'अनयूज़्ड ऐप सुरक्षा',
     privacyAutoResetOn:
         'कुछ महीने ऐप न खोलने पर Android अनुमतियाँ हटा सकता है।',
-    privacyAutoResetOff: 'ऐप कुछ समय इस्तेमाल न होने पर भी अनुमतियाँ बनी रहेंगी।',
+    privacyAutoResetOff:
+        'ऐप कुछ समय इस्तेमाल न होने पर भी अनुमतियाँ बनी रहेंगी।',
     privacyAutoResetAction: 'अनुमतियाँ बनाए रखें',
     privacyProtected: 'सुरक्षित',
     privacyManageAll: 'सेटिंग्स में सब मैनेज करें',
@@ -468,8 +452,7 @@ class OkapiStrings {
     deniedRetry: 'पुन्हा प्रयत्न करा',
     deniedCancel: 'रद्द करा',
     settingsTitle: 'सेटिंग्जमध्ये {permission} सुरू करा',
-    settingsMessage:
-        'या ॲपसाठी {permission} बंद आहे. सेटिंग्ज उघडा, परवानग्या (Permissions) वर टॅप करा आणि {permission} सुरू करा.',
+    settingsMessage: 'या ॲपसाठी {permission} बंद आहे. सेटिंग्ज उघडा, परवानग्या (Permissions) वर टॅप करा आणि {permission} सुरू करा.',
     settingsOpen: 'सेटिंग्ज उघडा',
     settingsCancel: 'आत्ता नको',
     serviceTitle: '{service} बंद आहे',
@@ -477,8 +460,7 @@ class OkapiStrings {
     serviceOpen: 'सुरू करा',
     serviceCancel: 'रद्द करा',
     restrictedTitle: '{permission} प्रतिबंधित आहे',
-    restrictedMessage:
-        'ही परवानगी डिव्हाइसवरील निर्बंधांमुळे (जसे Screen Time किंवा वर्क प्रोफाइल) बंद आहे आणि इथून बदलता येत नाही.',
+    restrictedMessage: 'ही परवानगी डिव्हाइसवरील निर्बंधांमुळे (जसे Screen Time किंवा वर्क प्रोफाइल) बंद आहे आणि इथून बदलता येत नाही.',
     restrictedOk: 'ठीक आहे',
     multiTitle: 'सुरुवात करण्यासाठी काही परवानग्या',
     multiMessage: 'ॲपला काय हवे आहे आणि का, ते इथे पहा.',
@@ -501,20 +483,16 @@ class OkapiStrings {
     featureMessage: '{feature} चालण्यासाठी या परवानग्या द्या.',
     optionalLabel: 'ऐच्छिक',
     backgroundTitle: '{app} बॅकग्राउंडमध्ये चालू ठेवा',
-    backgroundMessage:
-        'तुमचा {brand} फोन बॅटरी वाचवण्यासाठी {app} थांबवू शकतो. नोटिफिकेशन आणि रिमाइंडर वेळेवर मिळण्यासाठी या स्टेप्स करा.',
+    backgroundMessage: 'तुमचा {brand} फोन बॅटरी वाचवण्यासाठी {app} थांबवू शकतो. नोटिफिकेशन आणि रिमाइंडर वेळेवर मिळण्यासाठी या स्टेप्स करा.',
     backgroundOpen: 'सेटिंग्ज उघडा',
     backgroundNotNow: 'आत्ता नको',
     backgroundConfirmTitle: 'तुम्ही हे सुरू केले का?',
-    backgroundConfirmMessage:
-        'फोन ॲप्सना ही सेटिंग तपासू देत नाहीत. तुम्ही {app} ला बॅकग्राउंडमध्ये चालण्याची परवानगी दिली का?',
+    backgroundConfirmMessage: 'फोन ॲप्सना ही सेटिंग तपासू देत नाहीत. तुम्ही {app} ला बॅकग्राउंडमध्ये चालण्याची परवानगी दिली का?',
     backgroundConfirmYes: 'हो, सुरू आहे',
     backgroundConfirmNo: 'अजून नाही',
     autoResetTitle: '{app} च्या परवानग्या टिकवा',
-    autoResetMessage:
-        'काही महिने न उघडलेल्या ॲप्सच्या परवानग्या Android काढून टाकतो. {app} नीट चालण्यासाठी हे बंद करा.',
-    autoResetRevokedMessage:
-        '{app} काही काळ न वापरल्यामुळे Android ने {list} काढून टाकले. पुन्हा असे होऊ नये म्हणून ऑटो-रीसेट बंद करा.',
+    autoResetMessage: 'काही महिने न उघडलेल्या ॲप्सच्या परवानग्या Android काढून टाकतो. {app} नीट चालण्यासाठी हे बंद करा.',
+    autoResetRevokedMessage: '{app} काही काळ न वापरल्यामुळे Android ने {list} काढून टाकले. पुन्हा असे होऊ नये म्हणून ऑटो-रीसेट बंद करा.',
     autoResetSteps: [
       'सेटिंग्ज उघडा वर टॅप करा.',
       '"Pause app activity if unused" (किंवा "Remove permissions if app isn\'t used") बंद करा.',
@@ -527,12 +505,10 @@ class OkapiStrings {
     privacyFeatures: 'फीचर्स',
     privacyPermissions: 'परवानग्या',
     privacyBackground: 'बॅकग्राउंड ॲक्टिव्हिटी',
-    privacyBackgroundBody:
-        '{brand} फोन बॅटरी वाचवण्यासाठी ॲप्स थांबवू शकतात. रिमाइंडर वेळेवर मिळण्यासाठी {app} ला परवानगी द्या.',
+    privacyBackgroundBody: '{brand} फोन बॅटरी वाचवण्यासाठी ॲप्स थांबवू शकतात. रिमाइंडर वेळेवर मिळण्यासाठी {app} ला परवानगी द्या.',
     privacyBackgroundAction: 'सेट करा',
     privacyAutoReset: 'न वापरलेल्या ॲपचे संरक्षण',
-    privacyAutoResetOn:
-        'काही महिने ॲप न उघडल्यास Android परवानग्या काढू शकतो.',
+    privacyAutoResetOn: 'काही महिने ॲप न उघडल्यास Android परवानग्या काढू शकतो.',
     privacyAutoResetOff: 'ॲप काही काळ न वापरले तरी परवानग्या टिकून राहतील.',
     privacyAutoResetAction: 'परवानग्या टिकवा',
     privacyProtected: 'सुरक्षित',

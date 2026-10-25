@@ -120,21 +120,20 @@ class OkapiPrompt {
     Map<OkapiPermission, String>? reasons,
     List<String>? steps,
     IconData? icon,
-  }) =>
-      OkapiPrompt(
-        kind: kind,
-        permissions: permissions,
-        title: title ?? this.title,
-        message: message ?? this.message,
-        primaryLabel: primaryLabel ?? this.primaryLabel,
-        secondaryLabel: secondaryLabel ?? this.secondaryLabel,
-        reasons: reasons ?? this.reasons,
-        statuses: statuses,
-        featureName: featureName,
-        optional: optional,
-        steps: steps ?? this.steps,
-        icon: icon ?? this.icon,
-      );
+  }) => OkapiPrompt(
+    kind: kind,
+    permissions: permissions,
+    title: title ?? this.title,
+    message: message ?? this.message,
+    primaryLabel: primaryLabel ?? this.primaryLabel,
+    secondaryLabel: secondaryLabel ?? this.secondaryLabel,
+    reasons: reasons ?? this.reasons,
+    statuses: statuses,
+    featureName: featureName,
+    optional: optional,
+    steps: steps ?? this.steps,
+    icon: icon ?? this.icon,
+  );
 }
 
 /// Shows prompts. Implement this to take full control of Okapi's UI.
@@ -263,22 +262,20 @@ class OkapiConfig {
     OkapiPrompt Function(OkapiPrompt prompt)? promptOverride,
     bool? debugLogs,
     OkapiAskPolicy? askPolicy,
-  }) =>
-      OkapiConfig(
-        presenter: presenter ?? this.presenter,
-        theme: theme ?? this.theme,
-        strings: strings ?? this.strings,
-        rationaleMode: rationaleMode ?? this.rationaleMode,
-        maxRetries: maxRetries ?? this.maxRetries,
-        offerSettings: offerSettings ?? this.offerSettings,
-        settingsRightAfterRefusal:
-            settingsRightAfterRefusal ?? this.settingsRightAfterRefusal,
-        checkService: checkService ?? this.checkService,
-        settingsReturnTimeout:
-            settingsReturnTimeout ?? this.settingsReturnTimeout,
-        observers: observers ?? this.observers,
-        promptOverride: promptOverride ?? this.promptOverride,
-        debugLogs: debugLogs ?? this.debugLogs,
-        askPolicy: askPolicy ?? this.askPolicy,
-      );
+  }) => OkapiConfig(
+    presenter: presenter ?? this.presenter,
+    theme: theme ?? this.theme,
+    strings: strings ?? this.strings,
+    rationaleMode: rationaleMode ?? this.rationaleMode,
+    maxRetries: maxRetries ?? this.maxRetries,
+    offerSettings: offerSettings ?? this.offerSettings,
+    settingsRightAfterRefusal:
+        settingsRightAfterRefusal ?? this.settingsRightAfterRefusal,
+    checkService: checkService ?? this.checkService,
+    settingsReturnTimeout: settingsReturnTimeout ?? this.settingsReturnTimeout,
+    observers: observers ?? this.observers,
+    promptOverride: promptOverride ?? this.promptOverride,
+    debugLogs: debugLogs ?? this.debugLogs,
+    askPolicy: askPolicy ?? this.askPolicy,
+  );
 }

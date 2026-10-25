@@ -316,7 +316,9 @@ class _FeatureCard extends StatelessWidget {
                       children: [
                         Text(
                           feature.name,
-                          style: t.resolvedBody(context).copyWith(
+                          style: t
+                              .resolvedBody(context)
+                              .copyWith(
                                 color: t.onSurface,
                                 fontWeight: FontWeight.w700,
                                 fontSize: 16,
@@ -333,7 +335,8 @@ class _FeatureCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  if (result != null) OkapiFeatureLevelChip(level: result.level),
+                  if (result != null)
+                    OkapiFeatureLevelChip(level: result.level),
                 ],
               ),
             ),
@@ -398,8 +401,8 @@ class _PermissionRow extends StatelessWidget {
           );
         } else if (status.isDenied || status.isPermanentlyDenied) {
           trailing = FilledButton.tonal(
-            onPressed: () => Okapi.ask(context, permission,
-                reason: reason, force: true),
+            onPressed: () =>
+                Okapi.ask(context, permission, reason: reason, force: true),
             style: FilledButton.styleFrom(
               backgroundColor: t.primary.withAlpha(26),
               foregroundColor: t.primary,
@@ -409,7 +412,8 @@ class _PermissionRow extends StatelessWidget {
               ),
             ),
             child: Text(
-                status.isPermanentlyDenied ? s.settingsOpen : s.allowButton),
+              status.isPermanentlyDenied ? s.settingsOpen : s.allowButton,
+            ),
           );
         } else if (status.isGranted ||
             status.isLimited ||
@@ -438,7 +442,10 @@ class _PermissionRow extends StatelessWidget {
           trailing = OkapiStatusChip(status: status);
         }
         return Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: dense ? 8 : 12),
+          padding: EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: dense ? 8 : 12,
+          ),
           child: Row(
             children: [
               Container(
@@ -448,8 +455,11 @@ class _PermissionRow extends StatelessWidget {
                   color: t.iconBackground,
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: Icon(okapiIconFor(permission),
-                    color: t.iconColor, size: 21),
+                child: Icon(
+                  okapiIconFor(permission),
+                  color: t.iconColor,
+                  size: 21,
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -462,7 +472,9 @@ class _PermissionRow extends StatelessWidget {
                       children: [
                         Text(
                           s.nameOf(permission),
-                          style: t.resolvedBody(context).copyWith(
+                          style: t
+                              .resolvedBody(context)
+                              .copyWith(
                                 color: t.onSurface,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -531,14 +543,18 @@ class _InfoCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: t.resolvedBody(context).copyWith(
+                    style: t
+                        .resolvedBody(context)
+                        .copyWith(
                           color: t.onSurface,
                           fontWeight: FontWeight.w700,
                         ),
                   ),
                   const SizedBox(height: 2),
-                  Text(body,
-                      style: t.resolvedBody(context).copyWith(fontSize: 13.5)),
+                  Text(
+                    body,
+                    style: t.resolvedBody(context).copyWith(fontSize: 13.5),
+                  ),
                   const SizedBox(height: 10),
                   if (ok)
                     OkapiTag(label: okLabel, color: t.granted)

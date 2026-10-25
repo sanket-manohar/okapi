@@ -30,13 +30,13 @@ class FakeOkapiPlatform extends OkapiPlatform {
     Set<OkapiOemScreen> oemScreens = const {},
     this.autoReset = OkapiAutoResetStatus.notAvailable,
     this.onAutoResetSettingsReturn,
-  })  : store = Map.of(store),
-        oemScreens = Set.of(oemScreens),
-        statuses = Map.of(statuses),
-        requestResults = Map.of(requestResults),
-        services = Map.of(services),
-        undeclared = Set.of(undeclared),
-        rationale = Map.of(rationale);
+  }) : store = Map.of(store),
+       oemScreens = Set.of(oemScreens),
+       statuses = Map.of(statuses),
+       requestResults = Map.of(requestResults),
+       services = Map.of(services),
+       undeclared = Set.of(undeclared),
+       rationale = Map.of(rationale);
 
   /// Current statuses (mutable).
   final Map<OkapiPermission, OkapiStatus> statuses;
@@ -95,8 +95,7 @@ class FakeOkapiPlatform extends OkapiPlatform {
   }) async {
     requests.add(List.of(permissions));
     for (final p in permissions) {
-      statuses[p] =
-          requestResults[p] ?? statuses[p] ?? OkapiStatus.denied;
+      statuses[p] = requestResults[p] ?? statuses[p] ?? OkapiStatus.denied;
     }
     return {for (final p in permissions) p: statuses[p]!};
   }
@@ -107,7 +106,8 @@ class FakeOkapiPlatform extends OkapiPlatform {
 
   @override
   Future<OkapiServiceStatus> checkServiceStatus(
-          OkapiPermission permission) async =>
+    OkapiPermission permission,
+  ) async =>
       services[permission] ??
       (permission.hasService
           ? OkapiServiceStatus.enabled
@@ -168,13 +168,12 @@ OkapiDeviceInfo fakeAndroidDevice({
   OkapiOemBrand brand = OkapiOemBrand.xiaomi,
   int sdkInt = 34,
   String appName = 'Test App',
-}) =>
-    OkapiDeviceInfo(
-      platform: 'android',
-      manufacturer: brand.displayName,
-      brand: brand.displayName,
-      model: 'Test',
-      osVersion: '14',
-      sdkInt: sdkInt,
-      appName: appName,
-    );
+}) => OkapiDeviceInfo(
+  platform: 'android',
+  manufacturer: brand.displayName,
+  brand: brand.displayName,
+  model: 'Test',
+  osVersion: '14',
+  sdkInt: sdkInt,
+  appName: appName,
+);

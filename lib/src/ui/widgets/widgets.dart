@@ -84,8 +84,7 @@ class _OkapiPermissionBuilderState extends State<OkapiPermissionBuilder> {
       Okapi.ask(context, widget.permission, reason: widget.reason);
 
   @override
-  Widget build(BuildContext context) =>
-      widget.builder(context, _status, _ask);
+  Widget build(BuildContext context) => widget.builder(context, _status, _ask);
 }
 
 /// Shows [child] only when [permission] can be used; otherwise shows a
@@ -136,34 +135,34 @@ class _OkapiPermissionGateState extends State<OkapiPermissionGate> {
 
   @override
   Widget build(BuildContext context) => OkapiPermissionBuilder(
-        permission: widget.permission,
-        reason: widget.reason,
-        builder: (context, status, ask) {
-          if (status == null) {
-            return widget.loading ??
-                const Center(
-                  child: SizedBox.square(
-                    dimension: 28,
-                    child: CircularProgressIndicator(strokeWidth: 2.5),
-                  ),
-                );
-          }
-          if (status.canProceed) return widget.child;
-          if (widget.autoAsk && !_autoAsked && status.isDenied) {
-            _autoAsked = true;
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (mounted) ask();
-            });
-          }
-          return widget.lockedBuilder?.call(context, status, ask) ??
-              OkapiLockedCard(
-                permission: widget.permission,
-                status: status,
-                reason: widget.reason,
-                onAllow: ask,
-              );
-        },
-      );
+    permission: widget.permission,
+    reason: widget.reason,
+    builder: (context, status, ask) {
+      if (status == null) {
+        return widget.loading ??
+            const Center(
+              child: SizedBox.square(
+                dimension: 28,
+                child: CircularProgressIndicator(strokeWidth: 2.5),
+              ),
+            );
+      }
+      if (status.canProceed) return widget.child;
+      if (widget.autoAsk && !_autoAsked && status.isDenied) {
+        _autoAsked = true;
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          if (mounted) ask();
+        });
+      }
+      return widget.lockedBuilder?.call(context, status, ask) ??
+          OkapiLockedCard(
+            permission: widget.permission,
+            status: status,
+            reason: widget.reason,
+            onAllow: ask,
+          );
+    },
+  );
 }
 
 /// The default "allow access" card used by [OkapiPermissionGate].
@@ -205,7 +204,11 @@ class OkapiLockedCard extends StatelessWidget {
             children: [
               OkapiIconBadge(
                 permission: permission,
-                color: blocked ? t.danger : restricted ? t.warning : null,
+                color: blocked
+                    ? t.danger
+                    : restricted
+                    ? t.warning
+                    : null,
               ),
               const SizedBox(height: 20),
               Text(
@@ -324,8 +327,8 @@ class OkapiPermissionTile extends StatelessWidget {
       permission: permission,
       reason: reason,
       builder: (context, status, ask) {
-        final canAsk = status != null &&
-            (status.isDenied || status.isPermanentlyDenied);
+        final canAsk =
+            status != null && (status.isDenied || status.isPermanentlyDenied);
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 8),
           child: Row(
@@ -337,8 +340,11 @@ class OkapiPermissionTile extends StatelessWidget {
                   color: t.iconBackground,
                   borderRadius: BorderRadius.circular(14),
                 ),
-                child: Icon(okapiIconFor(permission),
-                    color: t.iconColor, size: 24),
+                child: Icon(
+                  okapiIconFor(permission),
+                  color: t.iconColor,
+                  size: 24,
+                ),
               ),
               const SizedBox(width: 14),
               Expanded(
@@ -347,7 +353,9 @@ class OkapiPermissionTile extends StatelessWidget {
                   children: [
                     Text(
                       Okapi.nameOf(permission),
-                      style: t.resolvedBody(context).copyWith(
+                      style: t
+                          .resolvedBody(context)
+                          .copyWith(
                             color: t.onSurface,
                             fontWeight: FontWeight.w600,
                           ),
@@ -355,8 +363,7 @@ class OkapiPermissionTile extends StatelessWidget {
                     if (showReason)
                       Text(
                         reason ?? Okapi.strings.reasonOf(permission),
-                        style:
-                            t.resolvedBody(context).copyWith(fontSize: 13.5),
+                        style: t.resolvedBody(context).copyWith(fontSize: 13.5),
                       ),
                   ],
                 ),
@@ -380,9 +387,11 @@ class OkapiPermissionTile extends StatelessWidget {
                       borderRadius: BorderRadius.circular(t.buttonRadius),
                     ),
                   ),
-                  child: Text(status.isPermanentlyDenied
-                      ? Okapi.strings.settingsOpen
-                      : Okapi.strings.allowButton),
+                  child: Text(
+                    status.isPermanentlyDenied
+                        ? Okapi.strings.settingsOpen
+                        : Okapi.strings.allowButton,
+                  ),
                 )
               else
                 OkapiStatusChip(status: status),
@@ -493,8 +502,10 @@ class _OkapiOnboardingState extends State<OkapiOnboarding> {
                             .copyWith(fontSize: 28, height: 1.15),
                       ),
                       const SizedBox(height: 10),
-                      Text(widget.subtitle ?? s.multiMessage,
-                          style: t.resolvedBody(context)),
+                      Text(
+                        widget.subtitle ?? s.multiMessage,
+                        style: t.resolvedBody(context),
+                      ),
                       const SizedBox(height: 24),
                       for (final p in widget.permissions)
                         OkapiPermissionTile(
@@ -521,8 +532,9 @@ class _OkapiOnboardingState extends State<OkapiOnboarding> {
                             side: BorderSide(color: t.primary.withAlpha(90)),
                             minimumSize: const Size.fromHeight(52),
                             shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(t.buttonRadius),
+                              borderRadius: BorderRadius.circular(
+                                t.buttonRadius,
+                              ),
                             ),
                             textStyle: t.resolvedButton(context),
                           ),
@@ -537,8 +549,7 @@ class _OkapiOnboardingState extends State<OkapiOnboarding> {
                           disabledBackgroundColor: t.primary.withAlpha(60),
                           minimumSize: const Size.fromHeight(54),
                           shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(t.buttonRadius),
+                            borderRadius: BorderRadius.circular(t.buttonRadius),
                           ),
                           textStyle: t.resolvedButton(context),
                         ),

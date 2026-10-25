@@ -97,8 +97,8 @@ class MethodChannelOkapi extends OkapiPlatform {
         permission: permissionName == null
             ? null
             : OkapiPermission.values
-                .where((p) => p.name == permissionName)
-                .firstOrNull,
+                  .where((p) => p.name == permissionName)
+                  .firstOrNull,
       );
     }
   }
@@ -134,13 +134,13 @@ class MethodChannelOkapi extends OkapiPlatform {
     if (!_isMobile || defaultTargetPlatform != TargetPlatform.android) {
       return false;
     }
-    return await _invoke<bool>('shouldShowRationale', permission.name) ??
-        false;
+    return await _invoke<bool>('shouldShowRationale', permission.name) ?? false;
   }
 
   @override
   Future<OkapiServiceStatus> checkServiceStatus(
-      OkapiPermission permission) async {
+    OkapiPermission permission,
+  ) async {
     if (!_isMobile || !permission.hasService) {
       return OkapiServiceStatus.notApplicable;
     }
@@ -157,8 +157,7 @@ class MethodChannelOkapi extends OkapiPlatform {
   @override
   Future<bool> openServiceSettings(OkapiPermission permission) async {
     if (!_isMobile) return false;
-    return await _invoke<bool>('openServiceSettings', permission.name) ??
-        false;
+    return await _invoke<bool>('openServiceSettings', permission.name) ?? false;
   }
 
   @override
@@ -218,8 +217,7 @@ class MethodChannelOkapi extends OkapiPlatform {
     if (!_isMobile || defaultTargetPlatform != TargetPlatform.android) {
       return OkapiAutoResetStatus.notAvailable;
     }
-    return OkapiAutoResetStatus.fromCode(
-        await _invoke<int>('autoResetStatus'));
+    return OkapiAutoResetStatus.fromCode(await _invoke<int>('autoResetStatus'));
   }
 
   @override
