@@ -21,7 +21,16 @@ allprojects {
 }
 
 apply plugin: "com.android.library"
-apply plugin: "kotlin-android"
+
+// AGP 9 can compile Kotlin by itself ("built-in Kotlin"). Apply the Kotlin
+// plugin only when that is not active, so the plugin builds with AGP 7, 8
+// and 9 alike.
+def agpMajor = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize(".")[0].toInteger()
+def builtInKotlinProperty = project.findProperty("android.builtInKotlin")?.toString()
+def builtInKotlin = agpMajor >= 9 && builtInKotlinProperty != "false"
+if (!builtInKotlin) {
+    apply plugin: "kotlin-android"
+}
 
 android {
     namespace = "dev.okapi.permissions"
@@ -32,10 +41,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-
     sourceSets {
         main.java.srcDirs += "src/main/kotlin"
     }
@@ -44,9 +49,14 @@ android {
         minSdk = 21
         consumerProguardFiles "consumer-rules.pro"
     }
+}
 
-    lintOptions {
-        disable "InvalidPackage"
+// Match Kotlin's JVM target to Java's. Works with Kotlin 1.8 to 2.x.
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    if (it.hasProperty("compilerOptions")) {
+        it.compilerOptions.jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+    } else {
+        it.kotlinOptions.jvmTarget = "17"
     }
 }
 

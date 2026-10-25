@@ -1,6 +1,6 @@
 // Copyright (c) 2026 Sanket Santosh Vidya Manohar. All rights reserved.
-// Use of this source code is governed by the Okapi Software License found
-// in the LICENSE file. Redistribution and republishing are not permitted.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 
 /// Phone makers whose battery and autostart rules Okapi knows about.
 enum OkapiOemBrand {
@@ -205,7 +205,9 @@ class OkapiDeviceInfo {
     if (isIOS) return OkapiOemBrand.apple;
     final b = '${brand.toLowerCase()} ${manufacturer.toLowerCase()}';
     bool has(String s) => b.contains(s);
-    if (has('xiaomi') || has('redmi') || has('poco')) return OkapiOemBrand.xiaomi;
+    if (has('xiaomi') || has('redmi') || has('poco')) {
+      return OkapiOemBrand.xiaomi;
+    }
     if (has('samsung')) return OkapiOemBrand.samsung;
     if (has('oneplus')) return OkapiOemBrand.oneplus;
     if (has('realme')) return OkapiOemBrand.realme;

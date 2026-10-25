@@ -50,5 +50,5 @@ First release of Okapi.
 
 **Privacy and legal**
 - Apple privacy manifest; zero third-party dependencies; no network calls.
-- Released under the Okapi Software License (free use, no redistribution),
-  with Terms of Use, Legal Disclaimer, Privacy Notice and Trademark Policy.
+- Released under the BSD 3-Clause license with a Trademark Policy for the
+  Okapi name and logo, plus Terms of Use, Legal Disclaimer, Privacy Notice and Trademark Policy.

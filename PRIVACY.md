@@ -58,7 +58,7 @@ Okapi does not collect or share any data, so it adds nothing to your app's Data 
 
 ## 7. Website
 
-The Okapi website uses no cookies, no analytics and no third-party trackers, and loads its fonts from the site itself. It stores your light/dark theme choice in your browser's local storage only. The hosting provider (for example Vercel) may keep standard server logs under its own privacy policy.
+The Okapi website uses no cookies, no analytics and no third-party trackers, and loads its fonts from the site itself. It stores your light/dark theme choice in your browser's local storage only. The hosting provider (GitHub Pages) may keep standard server logs under its own privacy policy.
 
 ## 8. Contact
 

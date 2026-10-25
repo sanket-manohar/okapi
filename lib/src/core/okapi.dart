@@ -1,6 +1,6 @@
 // Copyright (c) 2026 Sanket Santosh Vidya Manohar. All rights reserved.
-// Use of this source code is governed by the Okapi Software License found
-// in the LICENSE file. Redistribution and republishing are not permitted.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 
 import 'dart:async';
 
@@ -56,7 +56,9 @@ class Okapi {
       // that needs the count does it.
       WidgetsBinding.instance;
       unawaited(OkapiPolicyEngine.recordLaunch());
-    } catch (_) {}
+    } catch (_) {
+      // Binding not ready: the launch is counted later.
+    }
   }
 
   static OkapiPlatform get _platform => OkapiPlatform.instance;
@@ -1040,12 +1042,9 @@ class Okapi {
     if (blocked.isNotEmpty) {
       var opened = false;
       if (c.offerSettings && context.mounted) {
-        final go = await _show(
-          context,
-          _buildPrompt(c, OkapiPromptKind.settings, blocked,
-              reasons: reasons, statuses: current, feature: feature),
-          c,
-        );
+        final prompt = _buildPrompt(c, OkapiPromptKind.settings, blocked,
+            reasons: reasons, statuses: current, feature: feature);
+        final go = await _show(context, prompt, c);
         if (go && await openAppSettings()) {
           opened = true;
           await nextResume();
@@ -1145,7 +1144,7 @@ class _OkapiLifecycle with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       _resumes.add(null);
-      Okapi.refreshKnown();
+      unawaited(Okapi.refreshKnown());
     }
   }
 

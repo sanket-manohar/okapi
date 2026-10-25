@@ -17,7 +17,7 @@ Thank you for helping improve Okapi.
 
 ## License of contributions
 
-Okapi is not open source. It is licensed under the Okapi Software License (see LICENSE). By submitting a contribution you agree to the terms in section 4.2 of the LICENSE, which let the author use your contribution in Okapi. Your fork exists only to propose changes back to this repository and must not be published or distributed for any other purpose.
+Okapi is licensed under the BSD 3-Clause license (see LICENSE). By submitting a contribution you confirm that you wrote it or have the right to submit it, and you agree that it is licensed under the same BSD 3-Clause license. If you publish your own fork, give it a different name and logo as described in TRADEMARKS.md.
 
 ## Conduct
 

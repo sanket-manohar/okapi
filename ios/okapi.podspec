@@ -1,7 +1,7 @@
 #
 # Okapi: complete permission manager for Flutter.
 # Copyright (c) 2026 Sanket Santosh Vidya Manohar. All rights reserved.
-# Licensed under the Okapi Software License (see LICENSE).
+# Use of this source code is governed by a BSD-style license (see LICENSE).
 #
 Pod::Spec.new do |s|
   s.name             = 'okapi'
@@ -12,7 +12,7 @@ Check, request and guide users through every iOS permission with a
 polished, customisable flow.
                        DESC
   s.homepage         = 'https://github.com/sanket-manohar/okapi'
-  s.license          = { :type => 'Proprietary (Okapi Software License)', :file => '../LICENSE' }
+  s.license          = { :type => 'BSD-3-Clause', :file => '../LICENSE' }
   s.author           = 'Sanket Santosh Vidya Manohar'
   s.source           = { :path => '.' }
   s.source_files     = 'okapi/Sources/okapi/**/*.swift'

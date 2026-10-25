@@ -1,6 +1,6 @@
 // Copyright (c) 2026 Sanket Santosh Vidya Manohar. All rights reserved.
-// Use of this source code is governed by the Okapi Software License found
-// in the LICENSE file. Redistribution and republishing are not permitted. "Okapi" and the Okapi logo are trademarks; see TRADEMARKS.md.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 
 /// The platforms a permission is meaningful on.
 enum OkapiPlatformSupport {

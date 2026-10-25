@@ -45,13 +45,11 @@ class _OkapiExampleAppState extends State<OkapiExampleApp> {
       themeMode: _mode,
       theme: ThemeData(
         colorSchemeSeed: const Color(0xFF5A2A1E),
-        useMaterial3: true,
         extensions: [OkapiThemeData.okapiLight()],
       ),
       darkTheme: ThemeData(
         colorSchemeSeed: const Color(0xFF5A2A1E),
         brightness: Brightness.dark,
-        useMaterial3: true,
         extensions: [OkapiThemeData.okapiDark()],
       ),
       // Debug builds only: a floating panel to simulate any permission state.
@@ -224,9 +222,9 @@ class HomePage extends StatelessWidget {
               clipBehavior: Clip.antiAlias,
               child: OkapiFeatureGate(
                 feature: videoCall,
-                child: const Center(child: Text('🎥  Ready to call')),
                 partialChild:
                     const Center(child: Text('🎥  Ready (no headset)')),
+                child: const Center(child: Text('🎥  Ready to call')),
               ),
             ),
           ),

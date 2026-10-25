@@ -1,6 +1,7 @@
 // swift-tools-version: 5.9
 // Copyright (c) 2026 Sanket Santosh Vidya Manohar. All rights reserved.
-// Licensed under the Okapi Software License (see LICENSE).
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 
 import PackageDescription
 
@@ -12,11 +13,15 @@ let package = Package(
     products: [
         .library(name: "okapi", targets: ["okapi"]),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(name: "FlutterFramework", path: "../FlutterFramework"),
+    ],
     targets: [
         .target(
             name: "okapi",
-            dependencies: [],
+            dependencies: [
+                .product(name: "FlutterFramework", package: "FlutterFramework"),
+            ],
             resources: [
                 .process("Resources/PrivacyInfo.xcprivacy"),
             ]

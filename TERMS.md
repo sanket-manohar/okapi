@@ -36,8 +36,8 @@ You agree to:
 
 You must not:
 
-- (a) copy, republish, re-release, redistribute, sell, sublicense or mirror the Services or any substantial part of them, except as the LICENSE expressly allows;
-- (b) publish the Services or any modified version to any package registry, public repository or marketplace;
+- (a) redistribute the source code without the copyright notice and license text the LICENSE requires;
+- (b) publish any copy or modified version under the name "Okapi", with the Okapi logo, or in any way that suggests it is the official package (see TRADEMARKS.md);
 - (c) remove or alter any notice, or misrepresent the origin or authorship of the Services;
 - (d) use the Services for any purpose listed in DISCLAIMER.md, clause 5 (Acceptable Use);
 - (e) interfere with, overload or attempt to gain unauthorised access to the repository, the website or any related system; or
@@ -45,11 +45,11 @@ You must not:
 
 ## 6. Intellectual property
 
-6.1 The Services, including all code, text, graphics, logos, screenshots, the Guide and the website, are owned by the Author and protected by copyright, trademark and other laws. Except for the limited license in the LICENSE, no right, title or interest is transferred to you.
+6.1 The Services, including all code, text, graphics, logos, screenshots, the Guide and the website, are owned by the Author and protected by copyright, trademark and other laws. The source code is licensed to you under the BSD 3-Clause LICENSE. Apart from that license, no right, title or interest is transferred to you.
 
 6.2 "Okapi" and the Okapi logo are trademarks of the Author and may be used only as permitted by TRADEMARKS.md.
 
-6.3 Any feedback, issue, suggestion or contribution you submit may be used by the Author for any purpose without obligation to you, as set out in the LICENSE, section 4.2.
+6.3 Any feedback, issue, suggestion or contribution you submit may be used by the Author for any purpose without obligation to you. Code contributions are licensed under the same BSD 3-Clause license as Okapi.
 
 ## 7. Third-party services
 

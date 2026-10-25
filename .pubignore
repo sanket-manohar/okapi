@@ -8,3 +8,5 @@ build/
 .dart_tool/
 .github/
 assets/banner.png
+assets/brand/okapi-icon-1024.png
+assets/brand/okapi-icon-512.png

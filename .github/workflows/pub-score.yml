@@ -1,0 +1,41 @@
+# Runs the same checks pub.dev uses (pana) and prints the expected score.
+# Run it: GitHub repo > Actions > "pub.dev score" > Run workflow.
+# Read it: open the finished run > "Score report" step.
+name: pub.dev score
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  score:
+    name: Score the package
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Get packages
+        run: flutter pub get
+
+      - name: Formatting
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Static analysis
+        run: flutter analyze
+
+      - name: Tests
+        run: flutter test
+
+      - name: Publish dry run
+        run: dart pub publish --dry-run
+
+      - name: Score report
+        run: |
+          dart pub global activate pana
+          dart pub global run pana --no-warning --exit-code-threshold 0 .

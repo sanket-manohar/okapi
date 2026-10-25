@@ -9,7 +9,7 @@
 
 1.2 The Okapi Marks are claimed as trademarks of the Owner. They are used with the ™ symbol until registered.
 
-1.3 The source code of Okapi is licensed under the Okapi Software License (the "License"). **The License covers the use of the software only. It does not grant any right to use the Okapi Marks** beyond what this policy allows.
+1.3 The source code of Okapi is licensed under the BSD 3-Clause license (the "License"). **The License covers the use of the software only. It does not grant any right to use the Okapi Marks** beyond what this policy allows.
 
 ## 2. What you may do without asking
 
@@ -30,7 +30,7 @@ You must obtain the Owner's prior written permission to:
 
 ## 4. What is not allowed
 
-- 4.1 **Forks and modified versions.** The License does not allow modified versions to be distributed. In addition, no product, package or project may use a name confusingly similar to "Okapi" for permission-related or developer software (for example "okapi_plus", "okapi2" or "okapi_permissions_fork").
+- 4.1 **Forks and modified versions.** The License allows you to fork and redistribute the code, but a fork or modified version must be published under a different name and without the Okapi logo, and must state that it is not the official Okapi. No product, package or project may use a name confusingly similar to "Okapi" for permission-related or developer software (for example "okapi_plus", "okapi2" or "okapi_permissions_fork").
 - 4.2 **Package registries.** You must not publish any package to pub.dev or any other registry under the name "okapi" or a confusingly similar name, or describe a package as "the official Okapi".
 - 4.3 **Endorsement.** You must not suggest that the Owner sponsors, endorses, reviewed or certified your product, app, privacy practices or permission usage.
 - 4.4 **Altered marks.** You must not modify, abbreviate, animate or combine the Okapi logo with other marks.

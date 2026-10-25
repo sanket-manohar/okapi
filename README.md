@@ -10,7 +10,7 @@
 <p align="center">
   <a href="https://pub.dev/packages/okapi"><img src="https://img.shields.io/pub/v/okapi.svg?label=pub.dev&color=5A2A1E" alt="pub.dev"></a>
   <img src="https://img.shields.io/badge/platform-Android%20%7C%20iOS-5A2A1E" alt="Android | iOS">
-  <img src="https://img.shields.io/badge/license-Okapi%20Software%20License-5A2A1E" alt="License">
+  <img src="https://img.shields.io/badge/license-BSD--3--Clause-5A2A1E" alt="License">
 </p>
 
 ---
@@ -534,14 +534,14 @@ Flags: `OKAPI_EXCLUDE_CAMERA`, `_MICROPHONE`, `_PHOTOS`, `_LOCATION`, `_NOTIFICA
 
 ## Legal
 
-- **License:** [Okapi Software License](LICENSE). Free to use in your apps, including commercial apps. You may not copy, re-release, republish or redistribute Okapi or its source code, on its own or inside another developer product. Okapi is not open source.
+- **License:** [BSD 3-Clause](LICENSE). Free to use in any app, including commercial apps. Keep the copyright notice when you redistribute the code.
+- **Name and logo:** the BSD license covers the code only. A fork or modified copy must use a different name and logo and must not claim to be the official Okapi. See [TRADEMARKS.md](TRADEMARKS.md).
 - **Terms:** [TERMS.md](TERMS.md).
 - **Disclaimer:** Okapi is strictly a development package, not a decision-maker. It never decides which permissions an app requests, never accesses user data, and is not responsible for any permission requested or any data breach involving an app that uses it. Provided "as is", without any guarantee of results. See [DISCLAIMER.md](DISCLAIMER.md).
 - **Privacy:** Okapi collects nothing. See [PRIVACY.md](PRIVACY.md).
-- **Trademarks:** "Okapi" and the Okapi logo are trademarks of Sanket Santosh Vidya Manohar. See [TRADEMARKS.md](TRADEMARKS.md).
 - **Security:** see [SECURITY.md](SECURITY.md). **Contributing:** see [CONTRIBUTING.md](CONTRIBUTING.md).
 
-Copyright © 2026 Sanket Santosh Vidya Manohar. All rights reserved.
+Copyright © 2026 Sanket Santosh Vidya Manohar. "Okapi" and the Okapi logo are trademarks of Sanket Santosh Vidya Manohar.
 
 ## Author
 

@@ -1,5 +1,6 @@
 // Copyright (c) 2026 Sanket Santosh Vidya Manohar. All rights reserved.
-// Licensed under the Okapi Software License (see LICENSE).
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 // Run: dart run okapi doctor | sync
 import 'dart:io';
 
