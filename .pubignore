@@ -1,0 +1,10 @@
+# Keep the published package small: the website, PDF and design sources
+# live in the repository but are not part of the pub.dev package.
+website/
+doc/
+design/
+*.pdf
+build/
+.dart_tool/
+.github/
+assets/banner.png

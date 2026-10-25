@@ -1,0 +1,41 @@
+name: Bug report
+description: Something doesn't work as documented
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Okapi version
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: input
+    id: flutter
+    attributes:
+      label: Flutter version
+      placeholder: "flutter --version"
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and OS
+      placeholder: "Redmi Note 13, Android 14 / iPhone 15, iOS 18"
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: code
+    attributes:
+      label: Smallest code that shows the problem
+      render: dart
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Output of `dart run okapi:doctor`
+      render: text

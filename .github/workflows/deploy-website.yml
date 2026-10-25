@@ -1,0 +1,37 @@
+# Deploys the website/ folder to GitHub's hosting.
+# One-time setup: repo Settings › Pages › Build and deployment › Source: "GitHub Actions".
+# The site then appears under "Deployments" on the repo page:
+# https://sanket-manohar.github.io/okapi/
+name: Deploy website
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "website/**"
+      - ".github/workflows/deploy-website.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: website
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: website
+      - id: deployment
+        uses: actions/deploy-pages@v4

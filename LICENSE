@@ -1,0 +1,228 @@
+OKAPI SOFTWARE LICENSE
+Free Use, No Redistribution — Version 1.0
+
+Copyright (c) 2026 Sanket Santosh Vidya Manohar. All rights reserved.
+
+IMPORTANT: READ CAREFULLY. This is a legal agreement between you and
+Sanket Santosh Vidya Manohar (the "Licensor"). By downloading, installing,
+copying, accessing or using the Software, you agree to be bound by this
+License, the Terms of Use (TERMS.md), the Legal Disclaimer (DISCLAIMER.md),
+the Privacy Notice (PRIVACY.md) and the Trademark Policy (TRADEMARKS.md),
+each of which forms part of this License. If you do not agree, do not
+download, install, access or use the Software.
+
+This is NOT an open-source license. The Software is made available free of
+charge for use, but all rights not expressly granted below are reserved.
+
+-------------------------------------------------------------------------------
+1. DEFINITIONS
+-------------------------------------------------------------------------------
+
+1.1 "Software" means the software package known as "Okapi", including its
+    Dart, Kotlin, Swift and other source code, object code, build files,
+    assets, documentation, examples, command-line tools, website content and
+    all updates, versions and portions of any of them, as made available by
+    the Licensor through pub.dev, the official repository at
+    https://github.com/sanket-manohar/okapi, or any other official channel.
+
+1.2 "You" means the individual or legal entity exercising rights under this
+    License, and includes any entity that controls, is controlled by or is
+    under common control with that entity.
+
+1.3 "Application" means a software product that You develop, whose primary
+    purpose and value are separate from and substantially greater than the
+    Software, and into which the Software is incorporated solely as a
+    dependency in order to provide functionality to End Users.
+
+1.4 "End User" means any person who installs or uses an Application.
+
+1.5 "Distribute" means to copy, publish, republish, upload, host, mirror,
+    transmit, make available, sell, rent, lease, lend, sublicense or
+    otherwise transfer to any third party, by any means, in any form.
+
+1.6 "Derivative Work" means any modification, translation, adaptation,
+    port, rewrite, fork or other work based on or derived from the Software
+    or any portion of it, including any work that reproduces its structure,
+    sequence or organisation.
+
+-------------------------------------------------------------------------------
+2. LICENSE GRANT
+-------------------------------------------------------------------------------
+
+Subject to Your continuous compliance with this License, the Licensor grants
+You a worldwide, royalty-free, non-exclusive, non-transferable,
+non-sublicensable, revocable license to:
+
+2.1 download, install and keep copies of the Software, including through
+    the Dart and Flutter package tools and their caches, solely for the
+    purposes permitted below;
+
+2.2 use the Software as a dependency in Your Applications, including
+    commercial Applications, and run it on Your computers and on End Users'
+    devices;
+
+2.3 modify the Software solely as necessary to integrate it into Your own
+    Applications, provided that modified versions are used only internally
+    within those Applications and are never Distributed on their own; and
+
+2.4 Distribute the Software to End Users solely in compiled or object form
+    as an integral, non-separable part of an Application, and not in a way
+    that allows the Software to be extracted and used separately.
+
+-------------------------------------------------------------------------------
+3. RESTRICTIONS
+-------------------------------------------------------------------------------
+
+Except as expressly permitted in Section 2, You must not, and must not
+permit or help any third party to:
+
+3.1 copy, reproduce, Distribute, republish or re-release the Software, its
+    source code, documentation or any substantial portion of any of them,
+    whether in original or modified form;
+
+3.2 publish the Software or any Derivative Work to pub.dev, any other
+    package registry, any public source-code repository, any marketplace or
+    any download site, under any name;
+
+3.3 rename, rebrand, white-label or repackage the Software or any Derivative
+    Work, or present it as Your own work or as the work of anyone other than
+    the Licensor;
+
+3.4 incorporate the Software or any substantial portion of its source code
+    into any library, package, plugin, SDK, framework, template, boilerplate,
+    starter kit, code generator, tutorial course material sold for a fee, or
+    other developer product that is Distributed to developers;
+
+3.5 use the Software, its documentation or its design to create, train,
+    or improve a product or service that competes with the Software, or
+    Distribute any Derivative Work;
+
+3.6 remove, alter or obscure any copyright, license, trademark, attribution
+    or other notice in the Software;
+
+3.7 use the names "Okapi" or "Sanket Santosh Vidya Manohar", or the Okapi
+    logo, except as permitted by TRADEMARKS.md;
+
+3.8 circumvent any technical limitation in the Software, or decompile or
+    reverse engineer any part provided only in compiled form, except to the
+    extent that applicable law expressly permits it despite this
+    restriction; or
+
+3.9 use the Software in breach of any applicable law, of Section 5 of
+    DISCLAIMER.md (Acceptable Use) or of the policies of any app store or
+    platform on which an Application is Distributed.
+
+Viewing the source code in the official repository, and creating a fork on
+GitHub solely within GitHub's own functionality and solely for the purpose of
+proposing changes back to the official repository, are permitted. Such forks
+must not be used, published or Distributed for any other purpose.
+
+-------------------------------------------------------------------------------
+4. OWNERSHIP AND CONTRIBUTIONS
+-------------------------------------------------------------------------------
+
+4.1 The Software is licensed, not sold. The Licensor and its licensors own
+    and retain all right, title and interest, including all intellectual
+    property rights, in and to the Software and all copies and Derivative
+    Works, whoever creates them.
+
+4.2 If You submit any suggestion, issue, code, documentation or other
+    material ("Contribution") to the Licensor, You grant the Licensor a
+    perpetual, irrevocable, worldwide, royalty-free, fully paid-up,
+    transferable and sublicensable license to use, reproduce, modify,
+    publish, Distribute and otherwise exploit that Contribution for any
+    purpose, and You confirm that You have the right to grant this license.
+    The Licensor has no obligation to use any Contribution.
+
+-------------------------------------------------------------------------------
+5. NO WARRANTY AND LIMITATION OF LIABILITY
+-------------------------------------------------------------------------------
+
+5.1 THE SOFTWARE IS PROVIDED "AS IS" AND "AS AVAILABLE", WITH ALL FAULTS
+    AND WITHOUT WARRANTY OF ANY KIND, EXPRESS, IMPLIED OR STATUTORY,
+    INCLUDING ANY IMPLIED WARRANTY OF MERCHANTABILITY, SATISFACTORY QUALITY,
+    FITNESS FOR A PARTICULAR PURPOSE, ACCURACY, SECURITY, NON-INFRINGEMENT
+    OR THAT THE SOFTWARE WILL BE ERROR-FREE OR UNINTERRUPTED.
+
+5.2 TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL
+    THE LICENSOR OR ANY CONTRIBUTOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+    INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE OR CONSEQUENTIAL DAMAGES
+    (INCLUDING LOSS OF DATA, DATA BREACH, UNAUTHORISED ACCESS TO DATA, LOSS
+    OF PRIVACY, REGULATORY FINES OR PENALTIES, LOSS OF PROFITS, REVENUE,
+    GOODWILL OR BUSINESS, OR REMOVAL OF ANY APPLICATION FROM ANY STORE)
+    ARISING OUT OF OR IN CONNECTION WITH THE SOFTWARE, ANY APPLICATION, ANY
+    DEVICE PERMISSION REQUESTED OR OBTAINED WITH THE SOFTWARE, OR THIS
+    LICENSE, HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, EVEN IF ADVISED
+    OF THE POSSIBILITY OF SUCH DAMAGES.
+
+5.3 THE LICENSOR'S TOTAL AGGREGATE LIABILITY, WHERE IT CANNOT BE EXCLUDED,
+    SHALL NOT EXCEED THE AMOUNT YOU PAID FOR THE SOFTWARE, WHICH IS NIL
+    (INR 0).
+
+5.4 DISCLAIMER.md and TERMS.md set out further disclaimers, limitations and
+    Your indemnity obligations, which apply in addition to this Section.
+
+-------------------------------------------------------------------------------
+6. TERMINATION
+-------------------------------------------------------------------------------
+
+6.1 This License is effective until terminated. It terminates automatically
+    and immediately, without notice, if You breach any of its terms.
+
+6.2 On termination You must stop using the Software, delete all copies in
+    Your possession or control, and stop Distributing any Application that
+    contains the Software, except that copies of an Application already
+    installed by End Users before termination may continue to be used by
+    those End Users.
+
+6.3 Sections 1, 3, 4, 5, 6, 7 and 8 survive termination.
+
+-------------------------------------------------------------------------------
+7. ENFORCEMENT
+-------------------------------------------------------------------------------
+
+7.1 Any use or Distribution of the Software outside the scope of this
+    License is unlicensed and infringes the Licensor's copyright.
+
+7.2 The Licensor may seek injunctive relief, damages, account of profits,
+    takedown of infringing copies (including under the Information
+    Technology Act, 2000 and the Copyright Act, 1957 of India, and
+    equivalent laws elsewhere) and any other remedy available at law or in
+    equity. Breach of Section 3 would cause irreparable harm for which
+    damages alone would not be an adequate remedy.
+
+-------------------------------------------------------------------------------
+8. GENERAL
+-------------------------------------------------------------------------------
+
+8.1 Governing law. This License is governed by the laws of India, without
+    regard to conflict-of-law principles.
+
+8.2 Jurisdiction. Subject to any non-waivable right of a consumer, the
+    courts of competent jurisdiction in India have exclusive jurisdiction
+    over any dispute arising out of or in connection with this License.
+
+8.3 Export and sanctions. You must comply with all export control and
+    sanctions laws that apply to Your use or Distribution of the Software.
+
+8.4 Severability. If any provision is held unenforceable, it shall be
+    enforced to the maximum extent permissible and the remaining provisions
+    remain in full force.
+
+8.5 No waiver. A failure or delay in enforcing any provision is not a waiver.
+
+8.6 Assignment. You may not assign or transfer this License. The Licensor
+    may assign it without restriction.
+
+8.7 Changes. The Licensor may publish new versions of this License. Each
+    version of the Software is governed by the License that accompanies it.
+    Permission to use a version under any different terms requires the
+    Licensor's prior written consent.
+
+8.8 Entire agreement. This License, together with the documents named at the
+    top, is the entire agreement between You and the Licensor about the
+    Software and supersedes all prior understandings.
+
+8.9 Contact. Licensing questions and requests for permissions beyond this
+    License: https://sanketmanohar.com/ or
+    https://github.com/sanket-manohar/okapi/issues

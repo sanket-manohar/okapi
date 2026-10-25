@@ -1,0 +1,58 @@
+name: okapi
+description: >-
+  Complete permission manager for Flutter: guided flows, customisable UI,
+  feature-based asking, OEM background guides, Doctor and Sync tools.
+version: 1.0.0
+homepage: https://github.com/sanket-manohar/okapi
+repository: https://github.com/sanket-manohar/okapi
+issue_tracker: https://github.com/sanket-manohar/okapi/issues
+documentation: https://github.com/sanket-manohar/okapi#readme
+
+topics:
+  - permissions
+  - permission-handler
+  - privacy
+  - ui
+  - onboarding
+
+screenshots:
+  - description: Okapi rationale bottom sheet before the system dialog.
+    path: assets/screenshots/01_rationale_sheet.png
+  - description: Guiding the user to Settings after a permanent denial.
+    path: assets/screenshots/02_settings_prompt.png
+  - description: Ready-made multi-permission onboarding screen.
+    path: assets/screenshots/03_onboarding.png
+  - description: Permission gate with a locked card and dark theme.
+    path: assets/screenshots/04_gate_dark.png
+  - description: Ready-made Privacy Center with features, permissions and background card.
+    path: assets/screenshots/05_privacy_center.png
+  - description: Brand-aware background guide for Xiaomi and other phones.
+    path: assets/screenshots/06_oem_guide.png
+  - description: Debug panel to simulate any permission state.
+    path: assets/screenshots/07_debug_panel.png
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+  flutter: ">=3.27.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+executables:
+  okapi: okapi
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: dev.okapi.permissions
+        pluginClass: OkapiPlugin
+      ios:
+        pluginClass: OkapiPlugin
+

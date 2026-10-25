@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7A3B26"/>
+      <stop offset="1" stop-color="#2E140D"/>
+    </linearGradient>
+    <linearGradient id="face" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF8EF"/>
+      <stop offset="1" stop-color="#F1E1CC"/>
+    </linearGradient>
+    <clipPath id="clip"><rect width="512" height="512" rx="116"/></clipPath>
+  </defs>
+  <g clip-path="url(#clip)">
+    <rect width="512" height="512" fill="url(#bg)"/>
+    <!-- okapi stripes -->
+    <g fill="none" stroke="#F6EDE1" stroke-linecap="round" opacity="0.13">
+      <path d="M-20 330 C 40 318 80 300 118 262" stroke-width="22"/>
+      <path d="M-20 392 C 50 380 100 356 142 312" stroke-width="22"/>
+      <path d="M-20 454 C 60 442 116 414 160 364" stroke-width="22"/>
+      <path d="M10 520 C 80 500 132 470 172 420" stroke-width="22"/>
+    </g>
+  </g>
+  <g transform="translate(256 262) scale(0.94) translate(-256 -252)">
+  <!-- ears -->
+  <g>
+    <ellipse cx="150" cy="186" rx="78" ry="34" transform="rotate(-28 150 186)" fill="url(#face)"/>
+    <ellipse cx="156" cy="184" rx="52" ry="17" transform="rotate(-28 156 184)" fill="#8A4A32"/>
+    <ellipse cx="362" cy="186" rx="78" ry="34" transform="rotate(28 362 186)" fill="url(#face)"/>
+    <ellipse cx="356" cy="184" rx="52" ry="17" transform="rotate(28 356 184)" fill="#8A4A32"/>
+  </g>
+  <!-- ossicones -->
+  <rect x="216" y="104" width="22" height="52" rx="11" fill="#F1E1CC"/>
+  <rect x="274" y="104" width="22" height="52" rx="11" fill="#F1E1CC"/>
+  <circle cx="227" cy="106" r="12" fill="#3A1A12"/>
+  <circle cx="285" cy="106" r="12" fill="#3A1A12"/>
+  <!-- head -->
+  <path d="M256 140
+           C 310 140 336 168 336 214
+           C 336 262 316 300 306 344
+           C 298 382 284 404 256 404
+           C 228 404 214 382 206 344
+           C 196 300 176 262 176 214
+           C 176 168 202 140 256 140 Z" fill="url(#face)"/>
+  <!-- forehead patch (okapi brown) -->
+  <path d="M256 140 C 304 140 330 162 334 200 C 310 186 286 180 256 196 C 226 180 202 186 178 200 C 182 162 208 140 256 140Z" fill="#9C5638"/>
+  <!-- eyes -->
+  <ellipse cx="216" cy="246" rx="11" ry="13" fill="#2A140E"/>
+  <ellipse cx="296" cy="246" rx="11" ry="13" fill="#2A140E"/>
+  <circle cx="219" cy="242" r="3.5" fill="#FFF8EF"/>
+  <circle cx="299" cy="242" r="3.5" fill="#FFF8EF"/>
+  <!-- muzzle -->
+  <ellipse cx="256" cy="372" rx="44" ry="32" fill="#3A1A12"/>
+  <ellipse cx="240" cy="366" rx="7" ry="9" fill="#120806"/>
+  <ellipse cx="272" cy="366" rx="7" ry="9" fill="#120806"/>
+  </g>
+  <!-- granted badge -->
+  <circle cx="392" cy="392" r="70" fill="#2E140D"/>
+  <circle cx="392" cy="392" r="56" fill="#2BD9A0"/>
+  <path d="M364 394 L384 414 L422 374" fill="none" stroke="#0E3B2C" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
